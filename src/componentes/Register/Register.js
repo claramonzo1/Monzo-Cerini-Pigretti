@@ -80,7 +80,7 @@ class Register extends Component {
                         onChange={(event) => this.controlarCambios(event)}
                     />
 
-                  
+                    <label>Contraseña:</label>
                     <input
                         type="password"
                         name="password"
