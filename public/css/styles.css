@@ -106,3 +106,8 @@ nav {
 .login-container p {
     margin-top: 10px;
 }
+
+
+.filter-form input {
+    margin-bottom: 8px;
+}

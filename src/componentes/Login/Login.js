@@ -57,27 +57,27 @@ class Login extends Component {
 
     render() {
         return (
-            <section>
+            <section className="login-container">
                 <h2>Login</h2>
 
-                <form onSubmit={(event) => this.evitarSubmit(event)}>
-                    <label>Email:</label>
+                <form className="filter-form" onSubmit={(event) => this.evitarSubmit(event)}>
                     <input
                         type="email"
                         name="email"
+                        placeholder="Email"
                         value={this.state.email}
                         onChange={(event) => this.controlarCambios(event)}
                     />
 
-                    <label>Contraseña:</label>
                     <input
                         type="password"
                         name="password"
+                        placeholder="Contraseña"
                         value={this.state.password}
                         onChange={(event) => this.controlarCambios(event)}
                     />
 
-                    <button type="submit">Ingresar</button>
+                    <button className="btn-sm" type="submit">Ingresar</button>
                 </form>
 
                 <p>{this.state.error}</p>
