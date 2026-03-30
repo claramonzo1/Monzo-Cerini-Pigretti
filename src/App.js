@@ -1,7 +1,11 @@
 import React from "react";
+<<<<<<< HEAD
 import Register from "./componentes/Register/Register";
 import Navbar from "./componentes/Navbar/Navbar";
 import { Switch, Route } from "react-router-dom";
+=======
+import Login from "./componentes/Login/Login";
+>>>>>>> db708f01adb84d50315a5da26dffa7b341a2aec6
 
 function App() {
   let menu =[
@@ -20,6 +24,7 @@ function App() {
   ];
   return (
     <div className="App">
+<<<<<<< HEAD
             <Navbar elementos={menu} />
 
       <Switch>
@@ -31,6 +36,9 @@ function App() {
       <footer>
         <p>Pigretti, Monzó y Cerini</p>
       </footer>
+=======
+      <Login />
+>>>>>>> db708f01adb84d50315a5da26dffa7b341a2aec6
     </div>
   );
 }

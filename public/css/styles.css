@@ -90,3 +90,24 @@ nav {
         grid-template-columns: 1fr;
     }
 }
+
+.register-container,
+.login-container {
+    width: 50%;
+    margin: 30px auto;
+}
+
+.register-container h2,
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+.register-container p,
+.login-container p {
+    margin-top: 10px;
+}
+
+
+.filter-form input {
+    margin-bottom: 8px;
+}

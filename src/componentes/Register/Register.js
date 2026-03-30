@@ -68,10 +68,10 @@ class Register extends Component {
 
     render() {
         return (
-            <section>
+            <section className="register-container">
                 <h2>Crear cuenta</h2>
 
-                <form onSubmit={(event) => this.evitarSubmit(event)}>
+                <form className="filter-form" onSubmit={(event) => this.evitarSubmit(event)}>
                     <label>Email:</label>
                     <input
                         type="email"
