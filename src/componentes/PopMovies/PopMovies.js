@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 
 class PopMovies extends Component {
   constructor(props) {
@@ -25,19 +26,27 @@ const options = {method: 'GET', headers: {accept: 'application/json'}};
 
   render() {
     return (
-      <section className="cardContainer">
-        {this.state.peliculas.length === 0 ? (
-          <p>Cargando...</p>
-        ) : (
-          this.state.peliculas.map((pelicula, idx) => (
-            <RMcard key={idx} datos={pelicula} />
-          ))
-        )}
-      </section>
+      <div>
+        <h2 className="alert alert-primary">Popular movies this week</h2>
+        <section className="row cards" id="movies">
+          {this.state.peliculas.length === 0 ? (
+            <p>Cargando...</p>
+          ) : (
+            this.state.peliculas.map((pelicula, idx) => (
+              <Movie key={idx} datos={pelicula} history={this.props.history} />
+            ))
+          )}
+        </section>
+        <button
+          className="btn btn-outline-primary mb-3"
+          onClick={() => this.props.history.push("/peliculas")}
+        >
+          Ver todas
+        </button>
+      </div>
     );
   }
 }
 
-export default PopMovies; 
+export default PopMovies;
 
-//ver linea 32 o 33 donde dice personaje capaz tiene q decir otra cosa ??

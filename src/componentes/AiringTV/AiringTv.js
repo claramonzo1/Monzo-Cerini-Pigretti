@@ -26,6 +26,7 @@ const options = {method: 'GET', headers: {accept: 'application/json'}};
   render() {
     return (
       <section className="cardContainer">
+        <h2> TV show airing today </h2>
         {this.state.peliculas.length === 0 ? (
           <p>Cargando...</p>
         ) : (
@@ -39,5 +40,3 @@ const options = {method: 'GET', headers: {accept: 'application/json'}};
 }
 
 export default AiringTv; 
-
-//ver linea 32 o 33 donde dice personaje capaz tiene q decir otra cosa ??
