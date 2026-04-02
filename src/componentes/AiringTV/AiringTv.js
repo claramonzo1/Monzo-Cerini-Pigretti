@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import Serie from "../Serie/Serie";
+import {Link} from "react-router-dom"
 
 class AiringTv extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      peliculas: []
+      series: []
     };
   }
 
@@ -25,16 +27,22 @@ const options = {method: 'GET', headers: {accept: 'application/json'}};
 
   render() {
     return (
-      <section className="cardContainer">
+    <div> 
+        <h2 className="alert alert-warning"> Tv shows airing today</h2>
+      <section className="row cards" id="on-air-today">
         <h2> TV show airing today </h2>
-        {this.state.peliculas.length === 0 ? (
+        {this.state.series.length === 0 ? (
           <p>Cargando...</p>
         ) : (
-          this.state.peliculas.map((pelicula, idx) => (
-            <RMcard key={idx} datos={pelicula} />
+          this.state.series.map((serie, idx) => (
+            <Serie key={idx} datos={serie} history={this.props.history} />
           ))
         )}
       </section>
+      <Link className="btn btn-outline-warning mb-3" to="/detalles">
+          Ver todas
+        </Link>
+      </div>
     );
   }
 }
