@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
+import Movie from "../Movie/Movie"
 
 class PopMovies extends Component {
   constructor(props) {
@@ -9,35 +11,39 @@ class PopMovies extends Component {
   }
 
 componentDidMount() {
-
-const url = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1';
-const options = {method: 'GET', headers: {accept: 'application/json'}};
-
-    fetch(url,options)
-        .then((response) => response.json())
-        .then((data) =>
-            this.setState({
-                peliculas: data.results
-            })
-        )
-        .catch((error) => console.log(error));
+  fetch("https://api.themoviedb.org/3/movie/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US")
+    .then((response) => response.json())
+    .then((data) =>
+      this.setState({
+        peliculas: data.results
+      })
+    )
+    .catch((error) => console.log(error));
 }
 
   render() {
     return (
-      <section className="cardContainer">
-        {this.state.peliculas.length === 0 ? (
-          <p>Cargando...</p>
-        ) : (
-          this.state.peliculas.map((pelicula, idx) => (
-            <RMcard key={idx} datos={pelicula} />
-          ))
-        )}
-      </section>
+      <div>
+        <h2 className="alert alert-primary">Popular movies this week</h2>
+        <section className="row cards" id="movies">
+          {this.state.peliculas.length === 0 ? (
+            <p>Cargando...</p>
+          ) : (
+            this.state.peliculas.map((pelicula, idx) => (
+              <Movie key={idx} datos={pelicula}  />
+            ))
+          )}
+        </section>
+        {/* <button
+          className="btn btn-outline-primary mb-3"
+          onClick={() => this.props.history.push("/peliculas")}
+        >
+          Ver todas
+        </button> */}
+      </div>
     );
   }
 }
 
-export default PopMovies; 
+export default PopMovies;
 
-//ver linea 32 o 33 donde dice personaje capaz tiene q decir otra cosa ??
