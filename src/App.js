@@ -7,20 +7,14 @@ import Login from "./componentes/Login/Login";
 import Register from "./componentes/Register/Register";
 
 function App() {
-  let menu = [
-    {
-      nombre: "AboutUs",
-      Link: "/about"
-    },
-    {
-      nombre: "Contacto",
-      Link: "/contacto"
-    },
-    {
-      nombre: "Personajes",
-      Link: "/personajes"
-    }
-  ];
+let menu = [
+  { nombre: "Home", Link: "/" },
+  { nombre: "Películas", Link: "/peliculas" },
+  { nombre: "Series", Link: "/series" },
+  { nombre: "Favoritas", Link: "/favoritos" },
+  { nombre: "Registro", Link: "/registro" },
+  { nombre: "Login", Link: "/login" }
+];
 
   return (
     <div className="App">

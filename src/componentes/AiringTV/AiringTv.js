@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Serie from "../Serie/Serie";
 import {Link} from "react-router-dom"
+import "./Airing.css";
 
 
 class AiringTv extends Component {
@@ -30,9 +31,12 @@ componentDidMount() {
         {this.state.series.length === 0 ? (
           <p>Cargando...</p>
         ) : (
-          this.state.series.map((serie, idx) => (
-            <Serie key={idx} datos={serie} />
-          ))
+            this.state.series.slice(0, 4).map((serie, idx) => (
+  <Serie key={idx} datos={serie} />
+))
+        //   this.state.series.map((serie, idx) => (
+        //     <Serie key={idx} datos={serie} />
+        //   )) esto es lo q si
         )}
       </section>
       {/* <Link className="btn btn-outline-warning mb-3" to="/detalles">

@@ -1,18 +1,19 @@
 import React from "react"
-import{Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import "./Navbar.css"
 
-function Navbar (props){
-    return(
-        <nav> 
-            <ul className="main-nav">
-                {props.elementos.map((unMenu, idx)=> (
-                    <li> key={idx} 
-                    <Link to={unMenu.Link}>{unMenu.nombre}</Link>
-                    </li>
-                ))}
-            </ul>
-        </nav>
-    );
+function Navbar(props){
+  return(
+    <nav>
+      <ul>
+        {props.elementos.map((unMenu, idx) => (
+          <li key={idx}>
+            <Link to={unMenu.Link}>{unMenu.nombre}</Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 }
 
 export default Navbar;
