@@ -24,7 +24,7 @@ let menu = [
         <Route path="/" exact={true} component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/registro" component={Register} />
-        <Route path="/detalle/:tipo/:id" component={Detalle} />
+        <Route path="/detalle/id/:id" component={Detalle} />
       </Switch>
 
       <footer>
