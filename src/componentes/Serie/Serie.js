@@ -35,12 +35,12 @@ class Serie extends Component {
             <p className="card-text">{this.props.datos.overview}</p>
           ) : null}
 
-          <link
+          <Link
             className="btn btn-primary"
             to="{⁠/detalle/tv/${this.props.datos.id}⁠}"
           >
             Ver más
-          </link>
+          </Link>
 
           <button className="btn alert-primary">🩶</button>
         </div>
