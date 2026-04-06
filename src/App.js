@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
 import Navbar from "./componentes/Navbar/Navbar";
 import Home from "./screens/Home/Home";
 import Detalle from "./screens/Detalle/Detalle";

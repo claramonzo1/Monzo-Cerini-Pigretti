@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 import PopMovies from "../../componentes/PopMovies/PopMovies";
 import NowMovies from "../../componentes/NowMovies/NowMovies";
 import PopTv from "../../componentes/PopTv/PopTv"
