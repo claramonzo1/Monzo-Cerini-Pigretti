@@ -14,7 +14,7 @@ class Home extends Component {
     }
 
 controlarCambios(event){
-    this.state({
+    this.setState({
         busqueda: event.target.value
     });
 }
