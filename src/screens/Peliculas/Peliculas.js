@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./Peliculas.css";
 class Peliculas extends Component {
     constructor(props) {
         super(props);

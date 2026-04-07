@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom";
+import { Link } from "react-router-dom";
 import PopMovies from "../../componentes/PopMovies/PopMovies";
 import NowMovies from "../../componentes/NowMovies/NowMovies";
 import PopTv from "../../componentes/PopTv/PopTv"
@@ -20,20 +20,20 @@ controlarCambios(event){
 }
 
 enviarBusqueda(event){
-    event.preventDeFault();
-    this.props.history.push("/reultado/" + this.state.busqueda);
+    event.preventDefault();
+    this.props.history.push("/resultado/" + this.state.busqueda);
 }
 
 render(){
     return(
-        <div className="continer"> 
-        <from className="search-from" onSubmit={(event) => this.enviarBusqueda(event)}>
+        <div className="container"> 
+        <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
             <input
             type="text"
             placeholder="Buscar..."
             onChange= {(event) => this.controlarCambios(event)} />
             <button type="submit" className="btn btn-success btn-sm">Buscar</button>
-             </from>
+             </form>
              <PopMovies/>
              <NowMovies/>
              <PopTv/>

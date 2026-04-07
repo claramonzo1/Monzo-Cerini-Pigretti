@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Movies from "../../screens/Movies/Movies";
+import Peliculas from "../../screens/Peliculas/Peliculas";
 
 class Movie extends Component {
   constructor(props) {
