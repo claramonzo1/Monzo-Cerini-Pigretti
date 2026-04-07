@@ -1,0 +1,29 @@
+.single-card-tv {
+    width: 19%;
+}
+
+.single-card-on-air {
+    width: 19%;
+}
+
+.single-card-tv img,
+.single-card-on-air img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.cardBody {
+    margin-top: 20px;
+}
+
+.cardBody h5 {
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.card-text {
+    margin-top: 10px;
+}
