@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import "./Movies.css";
 
-class Movies extends Component {
+class Peliculas extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -81,4 +80,4 @@ class Movies extends Component {
     }
 }
 
-export default Movies;
+export default Peliculas;
