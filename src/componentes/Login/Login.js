@@ -39,7 +39,7 @@ class Login extends Component {
         }
 
         if (usuarioCorrecto === true) {
-            document.cookie = "sesion=activa; path=/";
+            
 
             this.setState({
                 email: "",
