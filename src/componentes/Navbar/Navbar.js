@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 
 function Navbar(props){
   return(
-    <nav>
-      <ul>
+    <nav className="nav">
+      <ul className="nav-list">
         {props.elementos.map((unMenu, idx) => (
           <li key={idx}>
             <Link to={unMenu.Link}>{unMenu.nombre}</Link>

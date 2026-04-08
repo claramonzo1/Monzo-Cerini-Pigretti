@@ -19,6 +19,7 @@ let menu = [
 
   return (
     <div className="App">
+      <h1>UdeSA Movies</h1>
       <Navbar elementos={menu} />
 
       <Switch>
