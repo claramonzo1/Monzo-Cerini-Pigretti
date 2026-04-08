@@ -4,10 +4,10 @@ import { Link } from "react-router-dom"
 function Navbar(props){
   return(
     <nav className="nav">
-      <ul className="nav-list">
+      <ul className="nav">
         {props.elementos.map((unMenu, idx) => (
-          <li key={idx}>
-            <Link to={unMenu.Link}>{unMenu.nombre}</Link>
+          <li key={idx} className="nav-item">
+            <Link className="nav-link" to={unMenu.Link}>{unMenu.nombre}</Link>
           </li>
         ))}
       </ul>
