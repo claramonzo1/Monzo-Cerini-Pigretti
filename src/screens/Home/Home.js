@@ -27,13 +27,13 @@ enviarBusqueda(event){
 render(){
     return(
         <div className="continer"> 
-        <from className="search-from" onSubmit={(event) => this.enviarBusqueda(event)}>
+        <form className="search-from" onSubmit={(event) => this.enviarBusqueda(event)}>
             <input
             type="text"
             placeholder="Buscar..."
             onChange= {(event) => this.controlarCambios(event)} />
             <button type="submit" className="btn btn-success btn-sm">Buscar</button>
-             </from>
+             </form>
              <PopMovies/>
              <NowMovies/>
              <PopTv/>

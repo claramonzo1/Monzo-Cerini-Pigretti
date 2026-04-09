@@ -18,13 +18,14 @@ let menu = [
 
   return (
     <div className="App">
+      <h1> Udesa Peliculas</h1>
       <Navbar elementos={menu} />
 
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/registro" component={Register} />
-        <Route path="/detalle/id/:id" component={Detalle} />
+        <Route path="/detalle/:tipo/:id" component={Detalle} />
       </Switch>
 
       <footer>
