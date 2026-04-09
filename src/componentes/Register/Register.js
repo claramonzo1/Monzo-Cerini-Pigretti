@@ -55,7 +55,7 @@ class Register extends Component {
             let usuariosStringificados = JSON.stringify(usuariosParseados);
             localStorage.setItem("usuarios", usuariosStringificados);
     
-            document.cookie = "sesion=activa; path=/";
+           
     
             this.setState({
                 email: "",

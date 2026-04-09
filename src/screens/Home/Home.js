@@ -14,20 +14,25 @@ class Home extends Component {
     }
 
 controlarCambios(event){
-    this.state({
+    this.setState({
         busqueda: event.target.value
     });
 }
 
 enviarBusqueda(event){
-    event.preventDeFault();
-    this.props.history.push("/reultado/" + this.state.busqueda);
+    event.preventDefault();
+    this.props.history.push("/resultado/" + this.state.busqueda);
 }
 
 render(){
     return(
+<<<<<<< HEAD
         <div className="continer"> 
         <form className="search-from" onSubmit={(event) => this.enviarBusqueda(event)}>
+=======
+        <div className="container"> 
+        <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
+>>>>>>> ed49d52dd01b90f2984067ec3c336d79f85a3534
             <input
             type="text"
             placeholder="Buscar..."

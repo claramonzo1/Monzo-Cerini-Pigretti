@@ -11,7 +11,7 @@ class PopTv extends Component {
   }
 
 componentDidMount() {
-  fetch("https://api.themoviedb.org/3/tv/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US")
+  fetch("https://api.themoviedb.org/3/tv/popular?api_key=1944c47872d6439a6a7d6a987a1991ac")
     .then((response) => response.json())
     .then((data) =>
       this.setState({

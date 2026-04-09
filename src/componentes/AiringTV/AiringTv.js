@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Serie from "../Serie/Serie";
 import {Link} from "react-router-dom"
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed49d52dd01b90f2984067ec3c336d79f85a3534
 
 class AiringTv extends Component {
   constructor(props) {

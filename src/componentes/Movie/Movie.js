@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Movies from "../../screens/Movies/Movies";
+import Peliculas from "../../screens/Peliculas/Peliculas";
 
 class Movie extends Component {
   constructor(props) {
@@ -20,7 +20,11 @@ class Movie extends Component {
     return (
       <article className="single-card-movie">
         <img
+<<<<<<< HEAD
           src="{https://image.tmdb.org/t/p/w500${this.props.datos.poster_path}"
+=======
+          src={`https://image.tmdb.org/t/p/w342${this.props.datos.poster_path}`}
+>>>>>>> ed49d52dd01b90f2984067ec3c336d79f85a3534
           className="card-img-top"
           alt={this.props.datos.title}
         />

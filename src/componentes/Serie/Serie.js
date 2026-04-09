@@ -19,7 +19,7 @@ class Serie extends Component {
     return (
       <article className="single-card-tv">
         <img
-          src="{⁠https://image.tmdb.org/t/p/w500${this.props.datos.poster_path⁠}}"
+          src={`https://image.tmdb.org/t/p/w500${this.props.datos.poster_path}`}
           className="card-img-top"
           alt={this.props.datos.name}
         />
@@ -36,7 +36,7 @@ class Serie extends Component {
 
           <Link
             className="btn btn-primary"
-            to="{⁠/detalle/tv/${this.props.datos.id}⁠}"
+            to={`/detalle/tv/${this.props.datos.id}`}
           >
             Ver más
           </Link>
