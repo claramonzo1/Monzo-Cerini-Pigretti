@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-<<<<<<< HEAD:src/screens/Movies/Movies.js
 
 
 class Movies extends Component {
-=======
-class Peliculas extends Component {
->>>>>>> ed49d52dd01b90f2984067ec3c336d79f85a3534:src/screens/Peliculas/Peliculas.js
     constructor(props) {
         super(props);
         this.state = {
@@ -85,4 +81,4 @@ class Peliculas extends Component {
     }
 }
 
-export default Peliculas;
+export default Movies;

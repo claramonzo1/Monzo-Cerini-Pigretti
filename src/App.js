@@ -19,23 +19,14 @@ let menu = [
 
   return (
     <div className="App">
-<<<<<<< HEAD
       <h1> Udesa Peliculas</h1>
-=======
-      <h1>UdeSA Movies</h1>
->>>>>>> ed49d52dd01b90f2984067ec3c336d79f85a3534
       <Navbar elementos={menu} />
 
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/registro" component={Register} />
-<<<<<<< HEAD
         <Route path="/detalle/:tipo/:id" component={Detalle} />
-=======
-        <Route path="/detalle/id/:id" component={Detalle} />
-        <Route path="/peliculas" component={Peliculas} />
->>>>>>> ed49d52dd01b90f2984067ec3c336d79f85a3534
       </Switch>
 
       <footer>

@@ -26,13 +26,8 @@ enviarBusqueda(event){
 
 render(){
     return(
-<<<<<<< HEAD
         <div className="continer"> 
         <form className="search-from" onSubmit={(event) => this.enviarBusqueda(event)}>
-=======
-        <div className="container"> 
-        <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
->>>>>>> ed49d52dd01b90f2984067ec3c336d79f85a3534
             <input
             type="text"
             placeholder="Buscar..."

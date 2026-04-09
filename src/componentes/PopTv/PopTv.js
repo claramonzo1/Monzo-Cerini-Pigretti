@@ -42,5 +42,3 @@ return (
 }
 
 export default PopTv; 
-
-//ver linea 32 o 33 donde dice personaje capaz tiene q decir otra cosa ??
