@@ -5,12 +5,12 @@ import Home from "./screens/Home/Home";
 import Detalle from "./screens/Detalle/Detalle";
 import Login from "./componentes/Login/Login";
 import Register from "./componentes/Register/Register";
-import Peliculas from "./screens/Peliculas/Peliculas";
+import Movies from "./screens/Movies/Movies";
 
 function App() {
 let menu = [
   { nombre: "Home", Link: "/" },
-  { nombre: "Películas", Link: "/peliculas" },
+  { nombre: "Movies", Link: "/movies" },
   { nombre: "Series", Link: "/series" },
   { nombre: "Favoritas", Link: "/favoritos" },
   { nombre: "Registro", Link: "/registro" },
@@ -27,6 +27,7 @@ let menu = [
         <Route path="/login" component={Login} />
         <Route path="/registro" component={Register} />
         <Route path="/detalle/:tipo/:id" component={Detalle} />
+        <Route path="/movies" component={Movies} />
       </Switch>
 
       <footer>
