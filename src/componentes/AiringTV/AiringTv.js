@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Serie from "../Serie/Serie";
-import {Link} from "react-router-dom"
 
 class AiringTv extends Component {
   constructor(props) {
@@ -10,16 +9,16 @@ class AiringTv extends Component {
     };
   }
 
-componentDidMount() {
-  fetch("https://api.themoviedb.org/3/tv/airing_today?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US")
-    .then((response) => response.json())
-    .then((data) =>
-      this.setState({
-        series: data.results
-      })
-    )
-    .catch((error) => console.log(error));
-}
+  componentDidMount() {
+    fetch("https://api.themoviedb.org/3/tv/airing_today?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US")
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          series: data.results
+        })
+      )
+      .catch((error) => console.log(error));
+  }
 
   render() {
     return (
@@ -44,4 +43,4 @@ componentDidMount() {
   }
 }
 
-export default AiringTv; 
+export default AiringTv;
