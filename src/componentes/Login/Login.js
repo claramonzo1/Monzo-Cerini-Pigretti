@@ -29,14 +29,13 @@ class Login extends Component {
 
         let usuarioCorrecto = false;
 
-        for (let i = 0; i < usuariosParseados.length; i++) {
-            if (
-                usuariosParseados[i].email === this.state.email &&
-                usuariosParseados[i].password === this.state.password
-            ) {
-                usuarioCorrecto = true;
-            }
-        }
+       for (let i = 0; i < usuariosParseados.length; i++) {
+            if (usuariosParseados[i].email === this.state.email) {
+                if (usuariosParseados[i].password === this.state.password) {
+            usuarioCorrecto = true;
+    }
+  }
+}
 
         if (usuarioCorrecto === true) {
             

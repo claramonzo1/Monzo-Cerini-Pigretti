@@ -28,7 +28,9 @@ return (
           {this.state.series.length === 0 ? (
             <p>Cargando...</p>
           ) : (
-            this.state.series.map((serie, idx) => (
+            this.state.series
+            .filter ((serie, idx)=> idx < 4)
+            .map((serie, idx) => (
               <Serie key={idx} datos={serie} />
             ))
           )}

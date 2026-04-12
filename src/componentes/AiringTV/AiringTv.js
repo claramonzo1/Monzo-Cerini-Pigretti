@@ -29,17 +29,16 @@ componentDidMount() {
         {this.state.series.length === 0 ? (
           <p>Cargando...</p>
         ) : (
-            this.state.series.slice(0, 4).map((serie, idx) => (
-  <Serie key={idx} datos={serie} />
+            this.state.series
+            .filter ((serie, idx)=> idx < 4)
+            .map((serie, idx) => (
+          <Serie key={idx} datos={serie} />
 ))
-        //   this.state.series.map((serie, idx) => (
-        //     <Serie key={idx} datos={serie} />
-        //   )) esto es lo q si
         )}
       </section>
-      {/* <Link className="btn btn-outline-warning mb-3" to="/detalles">
+      <Link className="btn btn-outline-warning mb-3" to="/detalles">
           Ver todas
-        </Link> */}
+        </Link>
       </div>
     );
   }

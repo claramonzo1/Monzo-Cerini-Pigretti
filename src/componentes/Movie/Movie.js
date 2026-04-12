@@ -20,7 +20,7 @@ class Movie extends Component {
     return (
       <article className="single-card-movie">
         <img
-          src="{https://image.tmdb.org/t/p/w500${this.props.datos.poster_path}"
+          src={`https://image.tmdb.org/t/p/w500${this.props.datos.poster_path}`}
           className="card-img-top"
           alt={this.props.datos.title}
         />

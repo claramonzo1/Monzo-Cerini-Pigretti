@@ -29,21 +29,24 @@ componentDidMount() {
           {this.state.peliculas.length === 0 ? (
             <p>Cargando...</p>
           ) : (
-            this.state.peliculas.map((pelicula, idx) => (
+            this.state.peliculas
+            .filter((pelicula, idx)=> idx < 4)
+            .map((pelicula, idx) => (
               <Movie key={idx} datos={pelicula}  />
             ))
           )}
         </section>
-        {/* <button
-          className="btn btn-outline-primary mb-3"
+        <button className="btn btn-outline-primary mb-3"
           onClick={() => this.props.history.push("/peliculas")}
         >
           Ver todas
-        </button> */}
+        </button>
       </div>
     );
   }
 }
 
 export default PopMovies;
+
+// .push("/peliculas")} Esto lo vimos? linea 38
 

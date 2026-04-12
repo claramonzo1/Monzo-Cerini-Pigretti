@@ -29,7 +29,9 @@ componentDidMount() {
         {this.state.peliculas.length === 0 ? (
           <p>Cargando...</p>
         ) : (
-          this.state.peliculas.map((pelicula, idx) => (
+          this.state.peliculas
+          .filter((pelicula, idx)=> idx < 4)
+          .map((pelicula, idx) => (
             <Movie key={idx} datos={pelicula} />
           ))
         )}
@@ -43,3 +45,5 @@ componentDidMount() {
 }
 
 export default NowMovies; 
+
+

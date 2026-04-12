@@ -18,10 +18,6 @@ function Navbar(props) {
                 </li>
                 )
                 }
-             <li className="nav-item">
-                <p className="nav-link usuario">UdeSA Movies</p>
-                <img src="" alt="" />
-            </li>
           </ul>
         </nav>
     )
