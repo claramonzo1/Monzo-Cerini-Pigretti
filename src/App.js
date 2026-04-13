@@ -1,25 +1,26 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Navbar from "./componentes/Navbar/Navbar";
 import Home from "./screens/Home/Home";
 import Detalle from "./screens/Detalle/Detalle";
 import Login from "./componentes/Login/Login";
 import Register from "./componentes/Register/Register";
 import Movies from "./screens/Movies/Movies";
+import Results from "./componentes/Results/Results";
 
 function App() {
-let menu = [
-  { nombre: "Home", Link: "/" },
-  { nombre: "Movies", Link: "/movies" },
-  { nombre: "Series", Link: "/series" },
-  { nombre: "Favoritas", Link: "/favoritos" },
-  { nombre: "Registro", Link: "/registro" },
-  { nombre: "Login", Link: "/login" }
-];
+  let menu = [
+    { nombre: "Home", Link: "/" },
+    { nombre: "Movies", Link: "/movies" },
+    { nombre: "Series", Link: "/series" },
+    { nombre: "Favoritas", Link: "/favoritos" },
+    { nombre: "Registro", Link: "/registro" },
+    { nombre: "Login", Link: "/login" }
+  ];
 
   return (
     <div className="container">
-      <h1> Udesa Movies </h1>
+      <h1>Udesa Movies</h1>
       <Navbar elementos={menu} />
 
       <Switch>
@@ -28,6 +29,7 @@ let menu = [
         <Route path="/registro" component={Register} />
         <Route path="/detalle/:tipo/:id" component={Detalle} />
         <Route path="/movies" component={Movies} />
+        <Route path="/resultado/:tipo/:busqueda" component={Results} />
       </Switch>
 
       <footer>
