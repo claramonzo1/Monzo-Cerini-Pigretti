@@ -18,7 +18,7 @@ let menu = [
 ];
 
   return (
-    <div className="App">
+    <div className="container">
       <h1> Udesa Movies </h1>
       <Navbar elementos={menu} />
 
