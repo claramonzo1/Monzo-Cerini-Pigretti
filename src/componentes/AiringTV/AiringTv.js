@@ -36,8 +36,11 @@ class AiringTv extends Component {
 ))
         )}
       </section>
-      <Link className="btn btn-outline-warning mb-3" to="/detalles">
+      <Link className="btn btn-outline-warning mb-3" to="/detalle">
+        <button type="button">
           Ver todas
+        </button>
+          
         </Link>
       </div>
     );
@@ -45,3 +48,4 @@ class AiringTv extends Component {
 }
 
 export default AiringTv;
+

@@ -39,7 +39,10 @@ class Movie extends Component {
             className="btn btn-primary"
             to={`/detalle/movie/${this.props.datos.id}`}
           >
-            Ver más
+            <button type="button">
+              Ver más
+            </button>
+            
           </Link>
 
           <button className="btn alert-primary">🩶</button>
@@ -50,3 +53,5 @@ class Movie extends Component {
 }
 
 export default Movie;
+
+
