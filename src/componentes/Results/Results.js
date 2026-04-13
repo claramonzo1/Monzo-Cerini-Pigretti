@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 class Results extends Component {
     constructor(props){
@@ -24,17 +27,15 @@ class Results extends Component {
         this.setState(
             {
                 favoritos: favoritosGuardados,
-                hayCookie: document.cookie !== ""
+                hayCookie: cookies.get("user-auth-cookie") !== undefined
             },
             () => this.buscarContenido()
         );
     }
 
     componentDidUpdate(prevProps){
-        if(
-            prevProps.match.params.busqueda !== this.props.match.params.busqueda ||
-            prevProps.match.params.tipo !== this.props.match.params.tipo
-        ){
+        if(prevProps.match.params.busqueda !== this.props.match.params.busqueda ||
+            prevProps.match.params.tipo !== this.props.match.params.tipo){
             this.buscarContenido();
         }
     }
@@ -121,8 +122,10 @@ class Results extends Component {
 
                 {this.state.cargando ? <p>Cargando...</p> : null}
 
-                {!this.state.cargando && this.state.resultados.length === 0 ? (
-                    <p>No se encontraron resultados.</p>
+                {this.state.cargando === false ? (
+                    this.state.resultados.length === 0 ? (
+                        <p>No se encontraron resultados.</p>
+                    ) : null
                 ) : null}
 
                 <section className="row">

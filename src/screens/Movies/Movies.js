@@ -39,9 +39,10 @@ class Movies extends Component {
     }
 
     render() {
-        let peliculasFiltradas = this.state.peliculas.filter(pelicula =>
-            pelicula.title.toLowerCase().includes(this.state.filtro.toLowerCase())
+       let peliculasFiltradas = this.state.peliculas.filter(pelicula =>
+            pelicula.title.includes(this.state.filtro)
         );
+        // lo vimos?
 
         return (
             <section className="all-movies">
@@ -50,7 +51,7 @@ class Movies extends Component {
                 <form className="filter-form">
                     <input
                         type="text"
-                        placeholder="Filtrar películas"
+                        placeholder="Buscar..."
                         value={this.state.filtro}
                         onChange={(event) => this.controlarCambios(event)}
                     />
@@ -61,14 +62,15 @@ class Movies extends Component {
                     <h3>Cargando...</h3>
                     :
                     <section className="cards">
-                        {peliculasFiltradas.map(pelicula =>
-                            <article className="single-card-movie" key={pelicula.id}>
+                        {peliculasFiltradas.map((pelicula, idx) =>
+                            <article className="single-card-movie" key={pelicula.title + idx}>
                                 <img
                                     src={"https://image.tmdb.org/t/p/w342" + pelicula.poster_path}
                                     alt={pelicula.title}
                                 />
                                 <div className="cardBody">
                                     <h3>{pelicula.title}</h3>
+                                    <button>Ver más</button>
                                 </div>
                             </article>
                         )}

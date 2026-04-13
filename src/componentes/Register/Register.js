@@ -20,7 +20,7 @@ class Register extends Component {
         });
     }
 
-    evitarSubmit(event) {
+    onSubmit(event) {
         event.preventDefault();
 
         let usuariosGuardados = localStorage.getItem("usuarios");
@@ -75,7 +75,7 @@ class Register extends Component {
             <section className="register-container">
                 <h2>Crear cuenta</h2>
 
-                <form className="filter-form" onSubmit={(event) => this.evitarSubmit(event)}>
+                <form className="filter-form" onSubmit={(event) => this.onSubmit(event)}>
                     <label>Email:</label>
                     <input
                         type="email"
