@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 class Login extends Component {
     constructor(props) {
@@ -28,17 +31,20 @@ class Login extends Component {
         }
 
         let usuarioCorrecto = false;
+        let usuarioEncontrado = null;
 
-       for (let i = 0; i < usuariosParseados.length; i++) {
-            if (usuariosParseados[i].email === this.state.email) {
-                if (usuariosParseados[i].password === this.state.password) {
-            usuarioCorrecto = true;
-    }
-  }
-}
+        for (let i = 0; i < usuariosParseados.length; i++) {
+            if (
+                usuariosParseados[i].email === this.state.email &&
+                usuariosParseados[i].password === this.state.password
+            ) {
+                usuarioCorrecto = true;
+                usuarioEncontrado = usuariosParseados[i];
+            }
+        }
 
         if (usuarioCorrecto === true) {
-            
+            cookies.set("user-auth-cookie", usuarioEncontrado.email);
 
             this.setState({
                 email: "",
