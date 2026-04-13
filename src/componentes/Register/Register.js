@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 class Register extends Component {
     constructor(props) {
@@ -16,24 +19,25 @@ class Register extends Component {
             [event.target.name]: event.target.value
         });
     }
+
     evitarSubmit(event) {
         event.preventDefault();
-    
+
         let usuariosGuardados = localStorage.getItem("usuarios");
         let usuariosParseados = [];
-    
+
         if (usuariosGuardados !== null) {
             usuariosParseados = JSON.parse(usuariosGuardados);
         }
-    
+
         let usuarioEncontrado = false;
-    
+
         for (let i = 0; i < usuariosParseados.length; i++) {
             if (usuariosParseados[i].email === this.state.email) {
                 usuarioEncontrado = true;
             }
         }
-    
+
         if (usuarioEncontrado === true) {
             this.setState({
                 error: "El email ya está en uso",
@@ -49,14 +53,14 @@ class Register extends Component {
                 email: this.state.email,
                 password: this.state.password
             };
-    
+
             usuariosParseados.push(nuevoUsuario);
-    
+
             let usuariosStringificados = JSON.stringify(usuariosParseados);
             localStorage.setItem("usuarios", usuariosStringificados);
-    
-           
-    
+
+            cookies.set("user-auth-cookie", nuevoUsuario.email);
+
             this.setState({
                 email: "",
                 password: "",
