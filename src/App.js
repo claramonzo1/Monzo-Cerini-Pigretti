@@ -7,6 +7,7 @@ import Login from "./componentes/Login/Login";
 import Register from "./componentes/Register/Register";
 import Movies from "./screens/Movies/Movies";
 import Results from "./componentes/Results/Results";
+import NotFound from "./screens/NotFound/NotFound"
 
 function App() {
   let menu = [
@@ -30,6 +31,7 @@ function App() {
         <Route path="/detalle/:tipo/:id" component={Detalle} />
         <Route path="/movies" component={Movies} />
         <Route path="/resultado/:tipo/:busqueda" component={Results} />
+        <Route component={NotFound} />
       </Switch>
 
       <footer>
