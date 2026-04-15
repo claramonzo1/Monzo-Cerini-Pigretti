@@ -20,7 +20,7 @@ class Login extends Component {
         });
     }
 
-    onsubmit(event) {
+    onSubmit(event) {
         event.preventDefault();
 
         let usuariosGuardados = localStorage.getItem("usuarios");
