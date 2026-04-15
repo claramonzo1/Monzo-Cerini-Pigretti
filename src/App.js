@@ -3,12 +3,12 @@ import { Switch, Route } from "react-router-dom";
 import Navbar from "./componentes/Navbar/Navbar";
 import Home from "./screens/Home/Home";
 import Detalle from "./screens/Detalle/Detalle";
-import Login from "./componentes/Login/Login";
-import Register from "./componentes/Register/Register";
+import Login from "./screens/Login/Login";
+import Register from "./screens/Register/Register";
 import Movies from "./screens/Movies/Movies";
 import Results from "./componentes/Results/Results";
 import Favoritos from "./screens/Favoritos/Favoritos";
-import NotFound from "./screens/NotFound/NotFound";
+import NotFound from "./componentes/NotFound/NotFound";
 
 function App() {
   let menu = [
