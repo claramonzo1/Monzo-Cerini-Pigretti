@@ -52,6 +52,8 @@ class Login extends Component {
                 error: "",
                 exito: "Login correcto"
             });
+
+            this.props.history.push("/");
         } else {
             this.setState({
                 error: "Credenciales incorrectas",

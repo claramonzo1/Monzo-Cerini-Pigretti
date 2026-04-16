@@ -67,6 +67,8 @@ class Register extends Component {
                 error: "",
                 exito: "Usuario creado correctamente"
             });
+
+            this.props.history.push("/");
         }
     }
 
