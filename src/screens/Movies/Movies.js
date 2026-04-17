@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 
 class Movies extends Component {
@@ -70,7 +71,12 @@ class Movies extends Component {
                                 />
                                 <div className="cardBody">
                                     <h3>{pelicula.title}</h3>
-                                    <button>Ver más</button>
+                                    <Link to="/detalle">
+                                        <button type="button">
+                                            Ver más
+                                        </button>
+                                    </Link>
+                                    
                                 </div>
                             </article>
                         )}
