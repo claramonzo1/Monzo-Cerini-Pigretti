@@ -36,7 +36,10 @@ return (
           )}
         </section>
         <Link className="btn btn-outline-warning mb-3" to="/series">
-          Ver todas
+          <button type="button">
+            Ver todas
+          </button>
+          
         </Link>
       </div>
     );

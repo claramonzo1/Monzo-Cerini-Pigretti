@@ -37,7 +37,10 @@ componentDidMount() {
         )}
       </section>
       <Link className="btn btn-outline-primary mb-3" to="/peliculas">
+        <button type="button">
           Ver todas
+        </button>
+          
         </Link>
       </div>
     );
