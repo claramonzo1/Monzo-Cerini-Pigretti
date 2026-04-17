@@ -1,16 +1,11 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
 function Navbar(props) {
   let logueado = cookies.get("user-auth-cookie");
-
-  function logout() {
-    cookies.remove("user-auth-cookie");
-    props.history.push("/");
-  }
 
   return (
     <nav>
@@ -36,17 +31,9 @@ function Navbar(props) {
             </li>
           );
         })}
-
-        {logueado ? (
-          <li className="nav-item">
-            <button className="nav-link" onClick={logout}>
-              Cerrar sesión
-            </button>
-          </li>
-        ) : null}
       </ul>
     </nav>
   );
 }
 
-export default withRouter(Navbar);
+export default Navbar;
