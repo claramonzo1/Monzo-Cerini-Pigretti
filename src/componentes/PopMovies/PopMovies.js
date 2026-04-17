@@ -39,7 +39,10 @@ class PopMovies extends Component {
         </section>
 
         <Link className="btn btn-outline-primary mb-3" to="/peliculas">
-          Ver todas
+          <button type="button">
+            Ver todas
+          </button>
+        
         </Link>
       </div>
     );
