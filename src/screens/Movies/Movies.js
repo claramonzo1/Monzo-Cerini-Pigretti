@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Navbar from "../../componentes/Navbar/Navbar";
 
 
 class Movies extends Component {
@@ -47,6 +48,8 @@ class Movies extends Component {
 
         return (
             <section className="all-movies">
+            <h1>Udesa Movies</h1>
+            <Navbar />
                 <h2>Todas las películas</h2>
 
                 <form className="filter-form">

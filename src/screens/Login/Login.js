@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
+import Navbar from "../../componentes/Navbar/Navbar";
 
 const cookies = new Cookies();
 
@@ -65,6 +66,9 @@ class Login extends Component {
     render() {
         return (
             <section className="login-container">
+                <h1>Udesa Movies</h1>
+                <Navbar />
+
                 <h2>Login</h2>
 
                 <form className="filter-form" onSubmit={(event) => this.onSubmit(event)}>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
+import Navbar from "../../componentes/Navbar/Navbar";
+
 
 const cookies = new Cookies();
 
@@ -69,12 +71,20 @@ class Detalle extends Component {
     }
 
     render() {
+
+        
         if (this.state.cargando) {
-            return <p>Cargando...</p>;
+            return (
+                <div className="container">
+                    <h1>Udesa Movies</h1>
+                    <Navbar />
+                    <p>Cargando...</p>
+                </div>
+            );
         }
 
-        const tipo       = this.props.match.params.tipo;
-        const detalle    = this.state.detalle;
+        const tipo = this.props.match.params.tipo;
+        const detalle = this.state.detalle;
         const esPelicula = tipo === "movie";
 
         return (

@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Navbar from "./componentes/Navbar/Navbar";
 import Home from "./screens/Home/Home";
 import Detalle from "./screens/Detalle/Detalle";
 import Login from "./screens/Login/Login";
@@ -11,20 +10,8 @@ import Favoritos from "./screens/Favoritos/Favoritos";
 import NotFound from "./screens/NotFound/NotFound";
 
 function App() {
-  let menu = [
-    { nombre: "Home", Link: "/" },
-    { nombre: "Movies", Link: "/movies" },
-    { nombre: "Series", Link: "/series" },
-    { nombre: "Favoritas", Link: "/favoritos" },
-    { nombre: "Registro", Link: "/registro" },
-    { nombre: "Login", Link: "/login" }
-  ];
-
   return (
-    <div className="container">
-      <h1>Udesa Movies</h1>
-      <Navbar elementos={menu} />
-
+    <div>
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/login" component={Login} />

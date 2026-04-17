@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
+import Navbar from "../../componentes/Navbar/Navbar";
 
 const cookies = new Cookies();
 
@@ -116,6 +117,8 @@ class Results extends Component {
 
         return(
             <div className="container">
+                <h1>Udesa Movies</h1>
+                <Navbar />
                 <h2>
                     Resultados de {tipo === "movie" ? "películas" : "series"} para: {busqueda}
                 </h2>

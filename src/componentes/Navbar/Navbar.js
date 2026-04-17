@@ -4,13 +4,22 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
-function Navbar(props) {
+function Navbar() {
   let logueado = cookies.get("user-auth-cookie");
+
+  let menu = [
+    { nombre: "Home", Link: "/" },
+    { nombre: "Movies", Link: "/movies" },
+    { nombre: "Series", Link: "/series" },
+    { nombre: "Favoritas", Link: "/favoritos" },
+    { nombre: "Registro", Link: "/registro" },
+    { nombre: "Login", Link: "/login" }
+  ];
 
   return (
     <nav>
       <ul className="nav nav-tabs my-4">
-        {props.elementos.map((elemento, idx) => {
+        {menu.map((elemento, idx) => {
           if (elemento.nombre === "Favoritas" && !logueado) {
             return null;
           }

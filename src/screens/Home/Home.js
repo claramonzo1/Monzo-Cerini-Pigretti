@@ -3,6 +3,7 @@ import PopMovies from "../../componentes/PopMovies/PopMovies";
 import NowMovies from "../../componentes/NowMovies/NowMovies";
 import PopTv from "../../componentes/PopTv/PopTv";
 import AiringTv from "../../componentes/AiringTV/AiringTv";
+import Navbar from "../../componentes/Navbar/Navbar";
 
 class Home extends Component {
     constructor(props){
@@ -36,8 +37,13 @@ class Home extends Component {
     }
 
     render(){
-        return(
-            <div className="container"> 
+        
+
+            return(
+                <div className="container">
+                    <h1>Udesa Movies</h1>
+                    <Navbar />
+    
                 <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
                     <select
                         value={this.state.tipo}

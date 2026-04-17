@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
+import Navbar from "../../componentes/Navbar/Navbar";
 
 const cookies = new Cookies();
 
@@ -45,7 +46,11 @@ class Favoritos extends Component {
 
         return(
             <div className="container">
-                <h2>Películas favoritas</h2>
+            <h1>Udesa Movies</h1>
+            <Navbar />
+        
+            <h2>Películas favoritas</h2>
+                
 
                 {peliculasFavoritas.length === 0 ? <p>No hay películas favoritas.</p> : null}
 
