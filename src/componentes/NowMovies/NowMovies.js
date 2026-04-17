@@ -36,7 +36,7 @@ componentDidMount() {
           ))
         )}
       </section>
-      <Link className="btn btn-outline-primary mb-3" to="/peliculas">
+      <Link className="btn btn-outline-primary mb-3" to="/movies">
         <button type="button">
           Ver todas
         </button>

@@ -6,9 +6,9 @@ import Detalle from "./screens/Detalle/Detalle";
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 import Movies from "./screens/Movies/Movies";
-import Results from "./componentes/Results/Results";
+import Results from "./screens/Results/Results";
 import Favoritos from "./screens/Favoritos/Favoritos";
-import NotFound from "./componentes/NotFound/NotFound";
+import NotFound from "./screens/NotFound/NotFound";
 
 function App() {
   let menu = [
