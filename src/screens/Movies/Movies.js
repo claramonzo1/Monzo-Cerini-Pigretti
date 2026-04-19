@@ -6,78 +6,86 @@ class Movies extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            peliculas: [],
+            datos: [],
+            peliculasFiltradas: [],
             pagina: 1,
-            filtro: ""
+            valor: ""
         };
     }
 
     componentDidMount() {
         fetch("https://api.themoviedb.org/3/movie/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=1")
             .then(response => response.json())
-            .then(data => this.setState({ peliculas: data.results }))
-            .catch(error => console.log("El error fue: " + error));
-    }
-
-    controlarCambios(event) {
-        this.setState({ filtro: event.target.value });
+            .then(data => {
+                this.setState({
+                    peliculasFiltradas: data.results,
+                    datos: data.results,
+                    pagina: 2
+                });
+            })
+            .catch(error => console.log(" error"));
     }
 
     cargarMas() {
-        let numeroPagina = this.state.pagina + 1;
         fetch("https://api.themoviedb.org/3/movie/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=" + numeroPagina)
             .then(response => response.json())
-            .then(data => this.setState({
-                peliculas: this.state.peliculas.concat(data.results),
-                pagina: numeroPagina
-            }))
-            .catch(error => console.log("El error fue: " + error));
+            .then(data => {
+                this.setState({
+                    peliculasFiltradas: this.state.peliculasFiltradas.concat(data.results),
+                    pagina: this.state.pagina + 1
+                });
+            })
+            .catch(error => console.log("error "));
+    }
+    evitarSubmit(event) {
+        evento.preventDefault();
+    }
+    controlCambios(event) {
+        this.setState({
+            valor: evento.target.value
+        }, () => this.filtrarPeliculas(this.state.valor)
+        )
     }
 
-    render() {
-        let peliculasFiltradas = this.state.peliculas.filter(pelicula =>
-            pelicula.title.includes(this.state.filtro)
-        );
+    filtrarPeliculas(textoAFiltrar) {
+        this.setState({
+            peliculasFiltradas: this.state.datos.filter((elm) => elm.title.toLowerCase().includes(textoAFiltrar).toLowerCase())
+        })
+    }
 
+
+    render() {
         return (
-            <section className="all-movies container">
+            <div className="all-movies container">
                 <h1>Udesa Movies</h1>
                 <Navbar />
                 <h2 className="alert alert-primary">Todas las películas</h2>
-
-                <form className="filter-form">
-                    <input
-                        type="text"
-                        placeholder="Buscar dentro de la lista"
-                        value={this.state.filtro}
-                        onChange={(event) => this.controlarCambios(event)}
-                    />
+                <form className="filter-form" onSubmit={(evento) => this.evitarSubmit(evento)}>
+                    <label className="label-filtrar">
+                        Filtrar pelicula: </label>
+                    <input type="text" onChange={(evento) => this.controlCambios(evento)} />
                 </form>
-
-                <button className="btn btn-info mb-3" onClick={() => this.cargarMas()}>Cargar más</button>
-
-                {this.state.peliculas.length === 0 ?
-                    <h3>Cargando...</h3>
-                    :
-                    <section className="cards">
-                        {peliculasFiltradas.map((pelicula, idx) =>
-                            <article className="single-card-movie" key={pelicula.title + idx}>
-                                <img
-                                    src={"https://image.tmdb.org/t/p/w342" + pelicula.poster_path}
-                                    alt={pelicula.title}
+                <section className="cards">
+                    {
+                        this.state.peliculasFiltradas.length === 0
+                            ? <h3>Cargando...</h3>
+                            : this.state.peliculasFiltradas.map((elm, idx) => (
+                                <Movie
+                                    key={idx}
+                                    dato={elm}
                                 />
-                                <div className="cardBody">
-                                    <h3>{pelicula.title}</h3>
-                                    <p className="card-text">{pelicula.overview}</p>
-                                    <Link to="/detalle">
-                                        <button type="button" className="btn btn-primary">Ver más</button>
-                                    </Link>
-                                </div>
-                            </article>
-                        )}
-                    </section>
+                            ))
+                    }
+                </section>
+                {
+                    this.state.pagina < this.state.peliculasFiltradas.length ?
+                    <button onClick={()=> this.cargarMas()} className="btn btn-danger">
+                        Cargar Más
+                    </button>
+                    :
+                    null
                 }
-            </section>
+            </div>
         );
     }
 }
