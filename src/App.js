@@ -23,7 +23,7 @@ function App() {
         <Route component={NotFound} />
       </Switch>
 
-      <footer>
+      <footer className="alert alert-info text-center">
         <p>Pigretti, Monzó y Cerini</p>
       </footer>
     </div>

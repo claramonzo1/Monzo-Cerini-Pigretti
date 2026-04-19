@@ -9,8 +9,7 @@ class Detalle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            detalle: null,
-            cargando: true,
+            detalle: {},
             esFavorito: false
         };
     }
@@ -20,8 +19,8 @@ class Detalle extends Component {
     }
 
     cargarDetalle() {
-        const tipo = this.props.match.params.tipo;   // "movie" o "tv"
-        const id   = this.props.match.params.id;
+        const tipo = this.props.match.params.tipo;
+        const id = this.props.match.params.id;
 
         fetch(
             `https://api.themoviedb.org/3/${tipo}/${id}?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US`
@@ -31,36 +30,48 @@ class Detalle extends Component {
                 let favoritosGuardados = localStorage.getItem("favoritos");
                 let favoritos = favoritosGuardados ? JSON.parse(favoritosGuardados) : [];
 
-                let encontrado = favoritos.some(
-                    fav => fav.id === data.id && fav.tipo === tipo
-                );
+                let filtrados = favoritos.filter(function (fav) {
+                    if (fav.id === data.id) {
+                        if (fav.tipo === tipo) {
+                            return true;
+                        }
+                    }
+                    else {return false};
+                });
+
+                let encontrado = filtrados.length > 0 ? true : false;
 
                 this.setState({
                     detalle: data,
-                    cargando: false,
                     esFavorito: encontrado
                 });
             })
             .catch(error => console.log("Error al cargar detalle: " + error));
     }
 
+
     agregarQuitarFavoritos() {
-        const tipo    = this.props.match.params.tipo;
+        const tipo = this.props.match.params.tipo;
         const detalle = this.state.detalle;
 
         let favoritosGuardados = localStorage.getItem("favoritos");
         let favoritos = favoritosGuardados ? JSON.parse(favoritosGuardados) : [];
 
         if (this.state.esFavorito) {
-            let filtrados = favoritos.filter(
-                fav => !(fav.id === detalle.id && fav.tipo === tipo)
-            );
-            localStorage.setItem("favoritos", JSON.stringify(filtrados));
+            let filtrados = favoritos.filter(function(fav) {
+                if (fav.id === detalle.id) {
+                    if (fav.tipo === tipo) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+            localStorage.setItem("favoritos", JSON.stringify(favoritos));
             this.setState({ esFavorito: false });
         } else {
             let nuevoFavorito = {
-                id:     detalle.id,
-                tipo:   tipo,
+                id: detalle.id,
+                tipo: tipo,
                 nombre: detalle.title || detalle.name,
                 imagen: detalle.poster_path
             };
@@ -71,8 +82,6 @@ class Detalle extends Component {
     }
 
     render() {
-
-        
         if (this.state.cargando) {
             return (
                 <div className="container">
@@ -136,3 +145,5 @@ class Detalle extends Component {
 }
 
 export default Detalle;
+
+// ver de la linea 84 para abajo porque hay cposas q no vimos 

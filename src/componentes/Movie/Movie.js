@@ -8,87 +8,65 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      verDescripcion: false,
       esFavorito: false
     };
   }
 
   componentDidMount() {
     let favoritosGuardados = localStorage.getItem("favoritos");
-    let favoritos = [];
 
-    if (favoritosGuardados !== null) {
-      favoritos = JSON.parse(favoritosGuardados);
-    }
+    
+    let favoritos = favoritosGuardados !== null ? JSON.parse(favoritosGuardados) : [];
 
-    let encontrado = false;
+    let idPelicula = this.props.datos.id;
 
-    for (let i = 0; i < favoritos.length; i++) {
-      if (
-        favoritos[i].id === this.props.datos.id &&
-        favoritos[i].tipo === "movie"
-      ) {
-        encontrado = true;
+    
+    let coincidentes = favoritos.filter(function(fav) {
+      if (fav.id === idPelicula) {
+        if (fav.tipo === "movie") {
+          return true;
+        }
       }
-    }
-
-    this.setState({
-      esFavorito: encontrado
+      return false;
     });
-  }
 
-  toggleDescripcion() {
-    this.setState({
-      verDescripcion: !this.state.verDescripcion
-    });
+    
+    this.setState({ esFavorito: coincidentes.length > 0 ? true : false });
   }
 
   agregarQuitarFavoritos() {
     let favoritosGuardados = localStorage.getItem("favoritos");
-    let favoritos = [];
 
-    if (favoritosGuardados !== null) {
-      favoritos = JSON.parse(favoritosGuardados);
-    }
+    
+    let favoritos = favoritosGuardados !== null ? JSON.parse(favoritosGuardados) : [];
 
-    let encontrado = false;
-    let filtrados = [];
+    if (this.state.esFavorito) {
+      
+      let idPelicula = this.props.datos.id;
 
-    for (let i = 0; i < favoritos.length; i++) {
-      if (
-        favoritos[i].id === this.props.datos.id &&
-        favoritos[i].tipo === "movie"
-      ) {
-        encontrado = true;
-      }
-    }
-
-    if (encontrado) {
-      filtrados = favoritos.filter(
-        (unFav) =>
-          !(unFav.id === this.props.datos.id && unFav.tipo === "movie")
-      );
+      let filtrados = favoritos.filter(function(fav) {
+        if (fav.id === idPelicula) {
+          if (fav.tipo === "movie") {
+            return false; 
+          }
+        }
+        return true; 
+      });
 
       localStorage.setItem("favoritos", JSON.stringify(filtrados));
+      this.setState({ esFavorito: false });
 
-      this.setState({
-        esFavorito: false
-      });
     } else {
+      
       let nuevoFavorito = {
         id: this.props.datos.id,
         tipo: "movie",
         nombre: this.props.datos.title,
         imagen: this.props.datos.poster_path
       };
-
       favoritos.push(nuevoFavorito);
-
       localStorage.setItem("favoritos", JSON.stringify(favoritos));
-
-      this.setState({
-        esFavorito: true
-      });
+      this.setState({ esFavorito: true });
     }
   }
 
@@ -104,23 +82,19 @@ class Movie extends Component {
         <div className="cardBody">
           <h5 className="card-title">{this.props.datos.title}</h5>
 
-          <button onClick={() => this.toggleDescripcion()}>
-            {this.state.verDescripcion ? "Ocultar descripción" : "Ver descripción"}
-          </button>
+          <p className="card-text">{this.props.datos.overview}</p>
 
-          {this.state.verDescripcion ? (
-            <p className="card-text">{this.props.datos.overview}</p>
-          ) : null}
-
-          <Link to={`/detalle/movie/${this.props.datos.id}`}>
+          <Link className="btn btn-primary" to={`/detalle/movie/${this.props.datos.id}`}>
             Ver más
           </Link>
 
+          
           {cookies.get("user-auth-cookie") ? (
             <button
               className="btn alert-primary"
               onClick={() => this.agregarQuitarFavoritos()}
             >
+              
               {this.state.esFavorito ? "❤️" : "🩶"}
             </button>
           ) : null}

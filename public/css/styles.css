@@ -112,3 +112,6 @@ nav {
     margin-bottom: 8px;
 }
 
+.single-card-movie img {
+    width: 100%;
+}
