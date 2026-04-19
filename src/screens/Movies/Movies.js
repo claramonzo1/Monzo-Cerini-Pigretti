@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../componentes/Navbar/Navbar";
+import Movie from "../../componentes/Movie/Movie"
 
 class Movies extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class Movies extends Component {
     }
 
     cargarMas() {
-        fetch("https://api.themoviedb.org/3/movie/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=" + numeroPagina)
+        fetch("https://api.themoviedb.org/3/movie/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=" + this.state.pagina)
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -38,33 +39,48 @@ class Movies extends Component {
             .catch(error => console.log("error "));
     }
     evitarSubmit(event) {
-        evento.preventDefault();
+        event.preventDefault();
     }
     controlCambios(event) {
         this.setState({
-            valor: evento.target.value
+            valor: event.target.value
         }, () => this.filtrarPeliculas(this.state.valor)
         )
     }
 
     filtrarPeliculas(textoAFiltrar) {
-        this.setState({
-            peliculasFiltradas: this.state.datos.filter((elm) => elm.title.toLowerCase().includes(textoAFiltrar).toLowerCase())
-        })
-    }
-
+    this.setState({
+        peliculasFiltradas: this.state.datos.filter((elm) => 
+            elm.title.toLowerCase().includes(textoAFiltrar.toLowerCase())
+        )
+    })
+}
+// no vimos .includes()
 
     render() {
         return (
             <div className="all-movies container">
                 <h1>Udesa Movies</h1>
+
                 <Navbar />
+
                 <h2 className="alert alert-primary">Todas las películas</h2>
-                <form className="filter-form" onSubmit={(evento) => this.evitarSubmit(evento)}>
+            
+                <form className="filter-form" onSubmit={(event) => this.evitarSubmit(event)}>
                     <label className="label-filtrar">
-                        Filtrar pelicula: </label>
-                    <input type="text" onChange={(evento) => this.controlCambios(evento)} />
+                        Buscar pelicula: </label> 
+                    <input type="text" onChange={(event) => this.controlCambios(event)} />
                 </form>
+            
+                {
+                    this.state.pagina < this.state.peliculasFiltradas.length ?
+                    <button onClick={()=> this.cargarMas()} className="btn btn-info">
+                        Cargar Más
+                    </button>
+                    :
+                    null
+                }
+                
                 <section className="cards">
                     {
                         this.state.peliculasFiltradas.length === 0
@@ -72,19 +88,11 @@ class Movies extends Component {
                             : this.state.peliculasFiltradas.map((elm, idx) => (
                                 <Movie
                                     key={idx}
-                                    dato={elm}
+                                    datos={elm}
                                 />
                             ))
                     }
                 </section>
-                {
-                    this.state.pagina < this.state.peliculasFiltradas.length ?
-                    <button onClick={()=> this.cargarMas()} className="btn btn-danger">
-                        Cargar Más
-                    </button>
-                    :
-                    null
-                }
             </div>
         );
     }
