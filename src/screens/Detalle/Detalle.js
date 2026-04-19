@@ -72,7 +72,7 @@ class Detalle extends Component {
             let nuevoFavorito = {
                 id: detalle.id,
                 tipo: tipo,
-                nombre: detalle.title || detalle.name,
+                nombre: detalle.title | detalle.name,
                 imagen: detalle.poster_path
             };
             favoritos.push(nuevoFavorito);
@@ -118,7 +118,7 @@ class Detalle extends Component {
                 </p>
 
                 {esPelicula && (
-                    <p>⏱ Duración: {detalle.runtime} minutos</p>
+                    <p> Duración: {detalle.runtime} minutos</p>
                 )}
 
                 <p>📝 Sinópsis: {detalle.overview}</p>

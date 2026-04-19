@@ -37,12 +37,6 @@ class Serie extends Component {
     });
   }
 
-  toggleDescripcion() {
-    this.setState({
-      verDescripcion: !this.state.verDescripcion
-    });
-  }
-
   agregarQuitarFavoritos() {
     let favoritosGuardados = localStorage.getItem("favoritos");
     let favoritos = [];
@@ -102,14 +96,7 @@ class Serie extends Component {
         />
         <div className="cardBody">
           <h5 className="card-title">{this.props.datos.name}</h5>
-
-          <button onClick={() => this.toggleDescripcion()}>
-            {this.state.verDescripcion ? "Ocultar descripción" : "Ver descripción"}
-          </button>
-
-          {this.state.verDescripcion ? (
-            <p className="card-text">{this.props.datos.overview}</p>
-          ) : null}
+          <p className="card-text">{this.props.datos.overview}</p>
 
           <Link
             className="btn btn-primary"

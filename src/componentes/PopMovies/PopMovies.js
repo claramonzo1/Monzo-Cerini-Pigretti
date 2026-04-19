@@ -26,7 +26,7 @@ class PopMovies extends Component {
       <div>
         <h2 className="alert alert-primary">Popular movies this week</h2>
 
-        <section className="row cards" id="movies">
+        <section className="row cards" >
           {this.state.peliculas.length === 0 ? (
             <p>Cargando...</p>
           ) : (

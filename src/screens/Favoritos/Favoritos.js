@@ -62,10 +62,10 @@ class Favoritos extends Component {
                                 <p>Sin imagen</p>
                             )}
 
-                            <h4>{item.nombre}</h4>
+                            <h5>{item.nombre}</h5>
                             <p>{item.descripcion}</p>
 
-                            <Link to={`/detalle/tv/${item.id}`}>
+                            <Link to={`/detalle/movie/${item.id}`}>
                                 <button className="btn btn-primary">Ver más</button>
                             </Link>
 
@@ -82,7 +82,7 @@ class Favoritos extends Component {
 
                 <section className="row">
                     {seriesFavoritas.map((item, idx) => (
-                        <article className="col-4 single-card-movie" key={item.id + idx}>
+                        <article className="col-3 single-card-movie" key={item.id + idx}>
                             {item.imagen ? (
                                 <img
                                     src={`https://image.tmdb.org/t/p/w342${item.imagen}`}
@@ -92,7 +92,7 @@ class Favoritos extends Component {
                                 <p>Sin imagen</p>
                             )}
 
-                            <h4>{item.nombre}</h4>
+                            <h5>{item.nombre}</h5>
                             <p>{item.descripcion}</p>
 
                             <Link to={`/detalle/tv/${item.id}`}>

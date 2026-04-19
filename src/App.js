@@ -8,6 +8,7 @@ import Movies from "./screens/Movies/Movies";
 import Results from "./screens/Results/Results";
 import Favoritos from "./screens/Favoritos/Favoritos";
 import NotFound from "./screens/NotFound/NotFound";
+import Series from "./screens/Series/Series"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/movies" component={Movies} />
         <Route path="/resultado/:tipo/:busqueda" component={Results} />
         <Route path="/favoritos" component={Favoritos} />
+        <Route path="/series" component={Series} />
         <Route component={NotFound} />
       </Switch>
 
