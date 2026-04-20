@@ -35,18 +35,23 @@ class Home extends Component {
             );
         }
     }
+render(){
+        const menu = [
+            { Nombre: "Login", Path: "/login" },
+            { Nombre: "Crear Cuenta", Path: "/registro" },
+            { Nombre: "Favoritos", Path: "/favoritos" },
+            { Nombre: "Movies", Path: "/movies" },
+            { Nombre: "Series", Path: "/series" }
+        ];
 
-    render(){
-        
+        return(
+            <div className="container">
+                <h1>Udesa Movies</h1>
+                <Navbar menu={menu} />
 
-            return(
-                <div className="container">
-                    <h1>Udesa Movies</h1>
-                    <Navbar />
-
-                <form className="search-form" onSubmit={(event) => this.evitarSubmit(event)}>
-                    <input type="text" placeholder="Buscar" onChange={(event) => this.controlarCambios(event)} value={this.state.valor}></input>
-                    <input type="submit" value="Submit"></input>
+                <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
+                    <input type="text" placeholder="Buscar" onChange={(event) => this.controlarCambios(event)} />
+                    <input type="submit" value="Submit" />
                 </form>
 
                 <PopMovies />
@@ -55,7 +60,7 @@ class Home extends Component {
                 <AiringTv />
             </div>
         );
-    }
-}
+    } 
+} 
 
 export default Home;

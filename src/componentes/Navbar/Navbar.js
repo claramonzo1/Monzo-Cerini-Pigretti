@@ -1,48 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { Component } from "react";
+import Home from "../../screens/Home/Home"
 
-const cookies = new Cookies();
+const cookies = new Cookies()
 
-function Navbar() {
-  let logueado = cookies.get("user-auth-cookie");
+class Navbar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      usuarioLogueado: cookies.get("usuarioLogueado"),
+    }
+  }
 
-  let menu = [
-    { nombre: "Home", Link: "/" },
-    { nombre: "Movies", Link: "/movies" },
-    { nombre: "Series", Link: "/series" },
-    { nombre: "Favoritas", Link: "/favoritos" },
-    { nombre: "Registro", Link: "/registro" },
-    { nombre: "Login", Link: "/login" }
-  ];
+  ocultar() {
+    this.setState({
+      ocultar: !this.state.verMas
+    })
+  }
 
-  return (
-    <nav>
-      <ul className="nav nav-tabs my-4">
-        {menu.map((elemento, idx) => {
-          if (elemento.nombre === "Favoritas" && !logueado) {
-            return null;
-          }
-
-          if (elemento.nombre === "Login" && logueado) {
-            return null;
-          }
-
-          if (elemento.nombre === "Registro" && logueado) {
-            return null;
-          }
-
-          return (
-            <li key={elemento.nombre + idx} className="nav-item">
-              <Link className="nav-link" to={elemento.Link}>
-                {elemento.nombre}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-  );
+  render() {
+    return (
+      <div>
+        <nav>
+          <ul className="nav nav-tabs my-4">
+            {
+              this.props.menu.map((elemento, idx) =>
+                <li key={elemento + idx} className={elemento.Nombre == "Login" ? (this.state.usuarioLogueado == null ? "show" : "hide")
+                  : elemento.Nombre == "Crear Cuenta" ? (this.state.usuarioLogueado == null ? "show" : "hide")
+                    : elemento.Nombre == "Favoritos" ? (this.state.usuarioLogueado != null ? "show" : "hide")
+                      : "show"}
+                >
+                  <a className="nav-link"><Link to={elemento.Path}> {elemento.Nombre}</Link></a></li>)}
+          </ul>
+        </nav>
+      </div>
+    )
+  }
 }
+
 
 export default Navbar;
