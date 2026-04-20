@@ -10,89 +10,78 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            error: "",
-            exito: ""
+            error: ""
         };
     }
 
-    controlarCambios(event) {
+    controlarEmail(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            email: event.target.value,
+            error: ""
         });
     }
 
-    onSubmit(event) {
+    controlarPassword(event) {
+        this.setState({
+            password: event.target.value,
+            error: ""
+        });
+    }
+
+    onSubmit(email, password) {
+
+    }
+
+    evitarFormulario(event) {
         event.preventDefault();
+        let usuariosStorage = localStorage.getItem("usuarios");
 
-        let usuariosGuardados = localStorage.getItem("usuarios");
-        let usuariosParseados = [];
+        if (usuariosStorage !== null) {
+            let usuariosRegistrados = JSON.parse(usuariosStorage);
 
-        if (usuariosGuardados !== null) {
-            usuariosParseados = JSON.parse(usuariosGuardados);
-        }
+            let usuarioEncontrado = usuariosRegistrados.filter(
+                usuario => usuario.email === this.state.email
+            );
 
-        let usuarioCorrecto = false;
-        let usuarioEncontrado = null;
+            if (usuarioEncontrado.length > 0) {
+                if (usuarioEncontrado[0].password === this.state.password) {
+                    cookies.set('sesion', this.state.email);
+                    this.setState({ error: '' }, this.props.history.push('/'));
 
-        for (let i = 0; i < usuariosParseados.length; i++) {
-            if (
-                usuariosParseados[i].email === this.state.email &&
-                usuariosParseados[i].password === this.state.password
-            ) {
-                usuarioCorrecto = true;
-                usuarioEncontrado = usuariosParseados[i];
+
+                    return;
+                }
             }
         }
 
-        if (usuarioCorrecto === true) {
-            cookies.set("usuarioLogueado", usuarioEncontrado.email);
-
-            this.setState({
-                email: "",
-                password: "",
-                error: "",
-                exito: "Login correcto"
-            });
-
-            this.props.history.push("/");
-        } else {
-            this.setState({
-                error: "Credenciales incorrectas",
-                exito: ""
-            });
-        }
+        this.setState({ error: 'Credenciales incorrectas' });
     }
 
     render() {
         return (
             <section className="login-container">
                 <h1>Udesa Movies</h1>
+
                 <Navbar />
 
-                <h2>Login</h2>
+                <h2 className="alert alert-primary">Login</h2>
 
-                <form className="filter-form" onSubmit={(event) => this.onSubmit(event)}>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={(event) => this.controlarCambios(event)}
-                    />
-
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Contraseña"
-                        value={this.state.password}
-                        onChange={(event) => this.controlarCambios(event)}
-                    />
-
-                    <button className="btn-sm" type="submit">Ingresar</button>
-                </form>
-
-                <p>{this.state.error}</p>
-                <p>{this.state.exito}</p>
+                <div>
+                    <form className="filter-form" onSubmit={(event) => this.enviarFormulario(event)}>
+                        <div>
+                            <input type="email" placeholder="Email" value={this.state.email} required
+                                onChange={(event) => this.controlarEmail(event)}
+                            />
+                        </div>
+                        <div>
+                            <input type="password" placeholder="Password" value={this.state.password} required
+                                onChange={(event) => this.controlarPassword(event)}
+                            />
+                        </div>
+                        <button className="btn-sm" type="submit">Ingresar</button>
+                    </form>
+                </div>
+                {this.state.error !== "" ? <p>{this.state.error}</p> : null}
             </section>
         );
     }

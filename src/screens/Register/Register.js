@@ -84,7 +84,7 @@ class Register extends Component {
 
                 <Navbar />
 
-                <h2 className="register-container">Registrarse</h2>
+                <h2 className="alert alert-primary">Registrarse</h2>
                 <div >
                     <div>
                         <form className="filter-form" onSubmit={(event) => this.enviarFormulario(event)}>
