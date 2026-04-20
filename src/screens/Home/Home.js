@@ -43,26 +43,10 @@ class Home extends Component {
                 <div className="container">
                     <h1>Udesa Movies</h1>
                     <Navbar />
-    
-                <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
-                    <select
-                        value={this.state.tipo}
-                        onChange={(event) => this.controlarTipo(event)}
-                    >
-                        <option value="movie">Películas</option>
-                        <option value="tv">Series</option>
-                    </select>
 
-                    <input
-                        type="text"
-                        placeholder="Buscar..."
-                        value={this.state.busqueda}
-                        onChange={(event) => this.controlarCambios(event)}
-                    />
-
-                    <button type="submit" className="btn btn-success btn-sm">
-                        Buscar
-                    </button>
+                <form className="search-form" onSubmit={(event) => this.evitarSubmit(event)}>
+                    <input type="text" placeholder="Buscar" onChange={(event) => this.controlarCambios(event)} value={this.state.valor}></input>
+                    <input type="submit" value="Submit"></input>
                 </form>
 
                 <PopMovies />
