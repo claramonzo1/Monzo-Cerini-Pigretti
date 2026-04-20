@@ -58,7 +58,7 @@ class Detalle extends Component {
                         <p>Sinopsis: {this.state.detalle.overview}</p>
                         <p>Generos: {" "}{this.state.detalle.genres.map((genero, idx) => (<span key={idx}>{genero.name} </span>))}</p>
 
-                        {cookies.get("user-auth-cookie") ? (
+                        {cookies.get("usuarioLogueado") ? (
                             <button
                                 className="btn alert-primary"
                                 onClick={() => this.agregarQuitarFavoritos()}

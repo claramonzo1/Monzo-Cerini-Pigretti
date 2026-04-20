@@ -6,7 +6,7 @@ import AiringTv from "../../componentes/AiringTV/AiringTv";
 import Navbar from "../../componentes/Navbar/Navbar";
 
 class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             busqueda: '',
@@ -14,40 +14,33 @@ class Home extends Component {
         };
     }
 
-    controlarCambios(event){
+    controlarCambios(event) {
         this.setState({
             busqueda: event.target.value
         });
     }
 
-    controlarTipo(event){
+    controlarTipo(event) {
         this.setState({
             tipo: event.target.value
         });
     }
 
-    enviarBusqueda(event){
+    enviarBusqueda(event) {
         event.preventDefault();
 
-        if(this.state.busqueda.trim() !== ''){
+        if (this.state.busqueda.trim() !== '') {
             this.props.history.push(
                 "/resultado/" + this.state.tipo + "/" + this.state.busqueda
             );
         }
     }
-render(){
-        const menu = [
-            { Nombre: "Login", Path: "/login" },
-            { Nombre: "Crear Cuenta", Path: "/registro" },
-            { Nombre: "Favoritos", Path: "/favoritos" },
-            { Nombre: "Movies", Path: "/movies" },
-            { Nombre: "Series", Path: "/series" }
-        ];
+    render() {
 
-        return(
+        return (
             <div className="container">
                 <h1>Udesa Movies</h1>
-                <Navbar menu={menu} />
+                <Navbar />
 
                 <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
                     <input type="text" placeholder="Buscar" onChange={(event) => this.controlarCambios(event)} />
@@ -60,7 +53,7 @@ render(){
                 <AiringTv />
             </div>
         );
-    } 
-} 
+    }
+}
 
 export default Home;

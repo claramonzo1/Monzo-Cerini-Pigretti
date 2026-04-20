@@ -89,7 +89,7 @@ class Movie extends Component {
           </Link>
 
           
-          {cookies.get("user-auth-cookie") ? (
+          {cookies.get("usuarioLogueado") ? (
             <button
               className="btn alert-primary"
               onClick={() => this.agregarQuitarFavoritos()}

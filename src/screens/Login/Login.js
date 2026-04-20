@@ -45,7 +45,7 @@ class Login extends Component {
         }
 
         if (usuarioCorrecto === true) {
-            cookies.set("user-auth-cookie", usuarioEncontrado.email);
+            cookies.set("usuarioLogueado", usuarioEncontrado.email);
 
             this.setState({
                 email: "",

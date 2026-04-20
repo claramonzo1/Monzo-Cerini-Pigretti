@@ -107,7 +107,7 @@ class Serie extends Component {
             Ver más
           </Link>
 
-          {cookies.get("user-auth-cookie") ? (
+          {cookies.get("usuarioLogueado") ? (
             <button
               className="btn alert-primary"
               onClick={() => this.agregarQuitarFavoritos()}
