@@ -55,7 +55,7 @@ class Movies extends Component {
         )
     })
 }
-// no vimos .includes()
+
 
     render() {
         return (

@@ -8,12 +8,14 @@ class Detalle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            detalle: null
+            detalle: null,
+            esFavorito: false
         };
     }
 
     componentDidMount() {
         let id = this.props.match.params.id;
+        let tipo = this.props.match.params.tipo;
 
         fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US`)
             .then(response => response.json())
@@ -25,41 +27,51 @@ class Detalle extends Component {
             .catch(error => console.log(error));
     }
 
-        render(){
-            if (this.state.detalle === null) {
-                return <h3>Cargando ...</h3>
-            }
+    agregarQuitarFavoritos() {
+        this.setState({ esFavorito: !this.state.esFavorito });
+    }
 
-            return (
-                <div>
-                    <h2 className="alert alert-primary">Detalle</h2>
-                    <section className="row">
-                        <article className="col-md-4">
-                            <img>
-                                src={`https://image.tmdb.org/t/p/w342${detalle.poster_path}`} alt={this.state.detalle.title} className="crad-img-top"
-                            </img>
-                        </article>
-                        <article className="col-md-8">
-                            <h3>{this.state.detalle.title}</h3>
-                            <p>Calificación: {this.state.detalle.vote_average}</p>
-                            <p>Fecha de estreno: {this.state.detalle.release_date}</p>
-                            <p>Duración: {this.state.detalle.runtime} minutos</p>
-                            <p>Sinopsis: {this.state.detalle.overview}</p>
-                            <p>Generos: {""}{this.state.detalle.genres.map((genero, idx) => (<span key={idx}>{genero.name}</span>))}</p>
+    render() {
 
-                            {cookies.get("user-auth-cookie") ? (
-                                <button
-                                    className="btn alert-primary"
-                                    onClick={() => this.agregarQuitarFavoritos()}
-                                >
-                                    {this.state.esFavorito ? "❤️" : "🩶"}
-                                </button>
-                            ) : null}
-                        </article>
-                    </section>
-                </div>
-            );
+        if (this.state.detalle === null) {
+            return <h3>Cargando ...</h3>
         }
-    };
 
-    export default Detalle;
+        return (
+            <div>
+                <h1>Udesa Movies</h1>
+                <Navbar />
+                <h2 className="alert alert-primary">Detalle</h2>
+                <section className="row">
+                    <article className="col-md-4">
+                        <img
+                            src={"https://image.tmdb.org/t/p/w342" + this.state.detalle.poster_path}
+                            alt={this.state.detalle.title}
+                            className="card-img-top"
+                        />
+                    </article>
+                    <article className="col-md-8">
+                        <h3>{this.state.detalle.title}</h3>
+                        <p>Calificación: {this.state.detalle.vote_average}</p>
+                        <p>Fecha de estreno: {this.state.detalle.release_date}</p>
+                        <p>Duración: {this.state.detalle.runtime} minutos</p>
+                        <p>Sinopsis: {this.state.detalle.overview}</p>
+                        <p>Generos: {" "}{this.state.detalle.genres.map((genero, idx) => (<span key={idx}>{genero.name} </span>))}</p>
+
+                        {cookies.get("user-auth-cookie") ? (
+                            <button
+                                className="btn alert-primary"
+                                onClick={() => this.agregarQuitarFavoritos()}
+                            >
+
+                                {this.state.esFavorito ? "❤️" : "🩶"}
+                            </button>
+                        ) : null}
+                    </article>
+                </section>
+            </div>
+        );
+    }
+};
+
+export default Detalle;
