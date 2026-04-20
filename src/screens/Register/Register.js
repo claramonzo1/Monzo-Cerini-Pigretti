@@ -10,100 +10,100 @@ class Register extends Component {
         this.state = {
             email: "",
             password: "",
-            error: "",
-            exito: ""
+            error: ""
         };
     }
 
-    controlarCambios(event) {
+    enviarFormulario(event) {
+        event.preventDefault();
+
+        let usuarios = localStorage.getItem("usuarios");
+
+        if (usuarios === null) {
+            usuarios = [];
+        } else {
+            usuarios = JSON.parse(usuarios);
+        }
+
+        if (this.state.password.length < 6) {
+            return this.setState({
+                error: "La contraseña debe tener mínimo 6 caracteres"
+            });
+        }
+
+        let existe = false;
+
+        for (let i = 0; i < usuarios.length; i++) {
+            if (usuarios[i].email === this.state.email) {
+                existe = true;
+            }
+        }
+        if (existe) {
+            return this.setState({
+                error: "El email ya está registrado"
+            });
+        }
+
+        let nuevoUsuario = {
+            email: this.state.email,
+            password: this.state.password
+        };
+
+        usuarios.push(nuevoUsuario);
+
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
         this.setState({
-            [event.target.name]: event.target.value
+            email: "",
+            password: "",
+            error: ""
+        });
+
+        alert("¡Cuenta creada con éxito!");
+        this.props.history.push("/login");
+    }
+
+    controlarEmail(event) {
+        this.setState({
+            email: event.target.value,
+            error: ""
         });
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-
-        let usuariosGuardados = localStorage.getItem("usuarios");
-        let usuariosParseados = [];
-
-        if (usuariosGuardados !== null) {
-            usuariosParseados = JSON.parse(usuariosGuardados);
-        }
-
-        let usuarioEncontrado = false;
-
-        for (let i = 0; i < usuariosParseados.length; i++) {
-            if (usuariosParseados[i].email === this.state.email) {
-                usuarioEncontrado = true;
-            }
-        }
-
-        if (usuarioEncontrado === true) {
-            this.setState({
-                error: "El email ya está en uso",
-                exito: ""
-            });
-        } else if (this.state.password.length < 6) {
-            this.setState({
-                error: "La contraseña debe tener al menos 6 caracteres",
-                exito: ""
-            });
-        } else {
-            let nuevoUsuario = {
-                email: this.state.email,
-                password: this.state.password
-            };
-
-            usuariosParseados.push(nuevoUsuario);
-
-            let usuariosStringificados = JSON.stringify(usuariosParseados);
-            localStorage.setItem("usuarios", usuariosStringificados);
-
-            cookies.set("user-auth-cookie", nuevoUsuario.email);
-
-            this.setState({
-                email: "",
-                password: "",
-                error: "",
-                exito: "Usuario creado correctamente"
-            });
-
-            this.props.history.push("/");
-        }
+    controlarPassword(event) {
+        this.setState({
+            password: event.target.value,
+            error: ""
+        });
     }
 
     render() {
-       
-            return (
-                <section className="register-container">
-                    <h1>Udesa Movies</h1>
-                    <Navbar />
-                <h2>Crear cuenta</h2>
+        return (
+            <section className="login-container">
+                <h1>Udesa Movies</h1>
 
-                <form className="filter-form" onSubmit={(event) => this.onSubmit(event)}>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={this.state.email}
-                        onChange={(event) => this.controlarCambios(event)}
-                    />
+                <Navbar />
 
-                    <label>Contraseña:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={(event) => this.controlarCambios(event)}
-                    />
-
-                    <button type="submit">Crear cuenta</button>
-                </form>
-
-                <p>{this.state.error}</p>
-                <p>{this.state.exito}</p>
+                <h2 className="register-container">Registrarse</h2>
+                <div >
+                    <div>
+                        <form className="filter-form" onSubmit={(event) => this.enviarFormulario(event)}>
+                            <div >
+                                <input type="email" placeholder="Email" value={this.state.email}
+                                    onChange={(event) => this.controlarEmail(event)} />
+                            </div>
+                            <div>
+                                <input type="password" placeholder="Password" value={this.state.password}
+                                    onChange={(event) => this.controlarPassword(event)} />
+                            </div>
+                            <button className="btn-sm" type="submit" >Crear cuenta</button>
+                        </form>
+                        <p class="mt-3 text-center">¿Ya tenés cuenta? <a href="/login">Iniciar sesión</a></p>
+                    </div>
+                    {this.state.error !== "" ? <p>{this.state.error}</p> : null}
+                </div>
             </section>
+
         );
     }
 }
