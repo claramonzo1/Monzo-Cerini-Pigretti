@@ -9,7 +9,7 @@ class Movie extends Component {
     super(props);
     this.state = {
       esFavorito: false,
-      descripcion: false
+      verDescripcion: false
     };
   }
 

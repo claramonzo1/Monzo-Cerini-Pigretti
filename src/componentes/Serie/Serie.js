@@ -1,5 +1,3 @@
-// HACERLA COMO MOVIE
-
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -10,66 +8,49 @@ class Serie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      verDescripcion: false,
-      esFavorito: false
+      esFavorito: false,
+      verDescripcion: false
     };
   }
 
   componentDidMount() {
     let favoritosGuardados = localStorage.getItem("favoritos");
-    let favoritos = [];
 
-    if (favoritosGuardados !== null) {
-      favoritos = JSON.parse(favoritosGuardados);
-    }
+    let favoritos = favoritosGuardados !== null ? JSON.parse(favoritosGuardados) : [];
 
-    let encontrado = false;
+    let idSerie = this.props.datos.id;
 
-    for (let i = 0; i < favoritos.length; i++) {
-      if (
-        favoritos[i].id === this.props.datos.id &&
-        favoritos[i].tipo === "tv"
-      ) {
-        encontrado = true;
+    let coincidentes = favoritos.filter(function (fav) {
+      if (fav.id === idSerie) {
+        if (fav.tipo === "tv") {
+          return true;
+        }
       }
-    }
-
-    this.setState({
-      esFavorito: encontrado
+      return false;
     });
+
+    this.setState({ esFavorito: coincidentes.length > 0 ? true : false });
   }
 
   agregarQuitarFavoritos() {
     let favoritosGuardados = localStorage.getItem("favoritos");
-    let favoritos = [];
 
-    if (favoritosGuardados !== null) {
-      favoritos = JSON.parse(favoritosGuardados);
-    }
+    let favoritos = favoritosGuardados !== null ? JSON.parse(favoritosGuardados) : [];
 
-    let encontrado = false;
-    let filtrados = [];
+    if (this.state.esFavorito) {
+      let idSerie = this.props.datos.id;
 
-    for (let i = 0; i < favoritos.length; i++) {
-      if (
-        favoritos[i].id === this.props.datos.id &&
-        favoritos[i].tipo === "tv"
-      ) {
-        encontrado = true;
-      }
-    }
-
-    if (encontrado) {
-      filtrados = favoritos.filter(
-        (unFav) =>
-          !(unFav.id === this.props.datos.id && unFav.tipo === "tv")
-      );
+      let filtrados = favoritos.filter(function (fav) {
+        if (fav.id === idSerie) {
+          if (fav.tipo === "tv") {
+            return false;
+          }
+        }
+        return true;
+      });
 
       localStorage.setItem("favoritos", JSON.stringify(filtrados));
-
-      this.setState({
-        esFavorito: false
-      });
+      this.setState({ esFavorito: false });
     } else {
       let nuevoFavorito = {
         id: this.props.datos.id,
@@ -79,39 +60,46 @@ class Serie extends Component {
       };
 
       favoritos.push(nuevoFavorito);
-
       localStorage.setItem("favoritos", JSON.stringify(favoritos));
-
-      this.setState({
-        esFavorito: true
-      });
+      this.setState({ esFavorito: true });
     }
   }
 
   render() {
     return (
-      <article className="single-card-tv">
+      <article className="single-card-movie">
         <img
           src={`https://image.tmdb.org/t/p/w500${this.props.datos.poster_path}`}
           className="card-img-top"
           alt={this.props.datos.name}
         />
+
         <div className="cardBody">
           <h5 className="card-title">{this.props.datos.name}</h5>
-          <p className="card-text">{this.props.datos.overview}</p>
 
-          <Link className="btn btn-primary" to={`/detalle/tv/${this.props.datos.id}`}>
-            detalle
-          </Link>
+          {this.state.verDescripcion ? <p className="card-text">{this.props.datos.overview}</p> : null}
 
-          {cookies.get("usuarioLogueado") ? (
+          <div className="d-flex gap-2 mt-2">
             <button
-              className="btn alert-primary"
-              onClick={() => this.agregarQuitarFavoritos()}
+              className="btn btn-primary btn-sm me-2"
+              onClick={() => this.setState({ verDescripcion: !this.state.verDescripcion })}
             >
-              {this.state.esFavorito ? "❤️" : "🩶"}
+              {this.state.verDescripcion ? "Ver menos" : "Ver más"}
             </button>
-          ) : null}
+
+            <Link className="btn btn-primary btn-sm me-2" to={`/detalle/tv/${this.props.datos.id}`}>
+              detalle
+            </Link>
+
+            {cookies.get("usuarioLogueado") ? (
+              <button
+                className="btn btn-outline-secondary btn-sm"
+                onClick={() => this.agregarQuitarFavoritos()}
+              >
+                {this.state.esFavorito ? "❤️" : "🩶"}
+              </button>
+            ) : null}
+          </div>
         </div>
       </article>
     );

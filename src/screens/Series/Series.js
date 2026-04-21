@@ -9,8 +9,8 @@ class Series extends Component {
             datos: [],
             seriesFiltradas: [],
             pagina: 1,
-            valor: " "
-        }
+            valor: ""
+        };
     }
 
     componentDidMount() {
@@ -23,8 +23,9 @@ class Series extends Component {
                     pagina: 2
                 });
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log("error"));
     }
+
     cargarMas() {
         fetch("https://api.themoviedb.org/3/tv/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=" + this.state.pagina)
             .then(response => response.json())
@@ -35,25 +36,26 @@ class Series extends Component {
                     pagina: this.state.pagina + 1
                 });
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log("error"));
     }
+
     evitarSubmit(event) {
         event.preventDefault();
     }
 
     controlCambios(event) {
-        this.setState(
-            { valor: event.target.value },
-            () => this.filtrarSeries(this.state.valor)
+        this.setState({
+            valor: event.target.value
+        }, () => this.filtrarSeries(this.state.valor)
         );
     }
+
     filtrarSeries(textoAFiltrar) {
         this.setState({
             seriesFiltradas: this.state.datos.filter((elm) =>
                 elm.name.toLowerCase().includes(textoAFiltrar.toLowerCase())
             )
         });
-
     }
 
     render() {
@@ -62,29 +64,35 @@ class Series extends Component {
                 <h1>Udesa Movies</h1>
 
                 <Navbar />
-                <h2 className="alert alert-primary">Todas las series </h2>
+
+                <h2 className="alert alert-primary">Todas las series</h2>
 
                 <form className="filter-form" onSubmit={(event) => this.evitarSubmit(event)}>
                     <label className="label-filtrar">
-                        Buscar serie: </label> 
+                        Buscar serie:
+                    </label>
                     <input type="text" onChange={(event) => this.controlCambios(event)} />
                 </form>
 
-                {this.state.pagina < this.state.seriesFiltradas.length ?
+                {
+                    this.state.pagina < this.state.seriesFiltradas.length ?
                     <button onClick={() => this.cargarMas()} className="btn btn-info">
                         Cargar Más
                     </button>
-                    : null
+                    :
+                    null
                 }
+
                 <section className="cards">
-                    {this.state.seriesFiltradas.length == 0
-                        ? <h3>Cargando...</h3>
-                        : this.state.seriesFiltradas.map((elm, idx) => (
-                            <Serie
-                                key={idx}
-                                datos={elm}
-                            />
-                        ))
+                    {
+                        this.state.seriesFiltradas.length === 0
+                            ? <h3>Cargando...</h3>
+                            : this.state.seriesFiltradas.map((elm, idx) => (
+                                <Serie
+                                    key={idx}
+                                    datos={elm}
+                                />
+                            ))
                     }
                 </section>
             </div>
