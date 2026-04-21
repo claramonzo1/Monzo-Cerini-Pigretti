@@ -43,10 +43,20 @@ class Home extends Component {
                 <Navbar />
 
                 <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
-                    <input type="text" placeholder="Buscar" onChange={(event) => this.controlarCambios(event)} />
+                    <input
+                        type="text"
+                        placeholder="Buscar"
+                        onChange={(event) => this.controlarCambios(event)}
+                    />
+
+                    <select value={this.state.tipo} onChange={(event) => this.controlarTipo(event)}>
+                        <option value="movie">Películas</option>
+                        <option value="tv">Series</option>
+                    </select>
+
                     <input type="submit" value="Submit" />
                 </form>
-
+                
                 <PopMovies />
                 <NowMovies />
                 <PopTv />
