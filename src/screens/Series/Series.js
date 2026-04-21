@@ -71,7 +71,7 @@ class Series extends Component {
                     <label className="label-filtrar">
                         Buscar serie:
                     </label>
-                    <input type="text" onChange={(event) => this.controlCambios(event)} />
+                    <input type="text" placeholder="Buscar" onChange={(event) => this.controlCambios(event)} />
                 </form>
 
                 {

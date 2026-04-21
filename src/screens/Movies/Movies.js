@@ -69,7 +69,7 @@ class Movies extends Component {
                 <form className="filter-form" onSubmit={(event) => this.evitarSubmit(event)}>
                     <label className="label-filtrar">
                         Buscar pelicula: </label> 
-                    <input type="text" onChange={(event) => this.controlCambios(event)} />
+                    <input type="text" placeholder="Buscar" onChange={(event) => this.controlCambios(event)} />
                 </form>
             
                 {
