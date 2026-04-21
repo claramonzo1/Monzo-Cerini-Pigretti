@@ -29,7 +29,7 @@ class Home extends Component {
     enviarBusqueda(event) {
         event.preventDefault();
 
-        if (this.state.busqueda.trim() !== '') {
+        if (this.state.busqueda() !== '') {
             this.props.history.push(
                 "/resultado/" + this.state.tipo + "/" + this.state.busqueda
             );
@@ -56,7 +56,7 @@ class Home extends Component {
 
                     <input type="submit" value="Submit" />
                 </form>
-                
+
                 <PopMovies />
                 <NowMovies />
                 <PopTv />
