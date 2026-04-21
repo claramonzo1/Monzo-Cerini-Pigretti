@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Movie from "../Movie/Movie";
 
 class PopMovies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      peliculas: []
+      peliculas: [],
+      verTodas: false
     };
   }
 
@@ -31,19 +31,16 @@ class PopMovies extends Component {
             <p>Cargando...</p>
           ) : (
             this.state.peliculas
-              .filter((pelicula, idx) => idx < 4)
+              .filter((pelicula, idx) => this.state.verTodas ? true : idx < 4)
               .map((pelicula, idx) => (
                 <Movie key={idx} datos={pelicula} />
               ))
           )}
         </section>
 
-        <Link className="btn btn-outline-primary mb-3" to="/movies">
-          <button type="button">
-            Ver todas
-          </button>
-        
-        </Link>
+        <button type="button" className="btn btn-outline-primary mb-3" onClick={() => this.setState({ verTodas: !this.state.verTodas })}>
+          {this.state.verTodas ? "Ver menos" : "Ver todas"}
+        </button>
       </div>
     );
   }

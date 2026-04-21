@@ -100,11 +100,8 @@ class Serie extends Component {
           <h5 className="card-title">{this.props.datos.name}</h5>
           <p className="card-text">{this.props.datos.overview}</p>
 
-          <Link
-            className="btn btn-primary"
-            to={`/detalle/tv/${this.props.datos.id}`}
-          >
-            Ver más
+          <Link className="btn btn-primary" to={`/detalle/tv/${this.props.datos.id}`}>
+            detalle
           </Link>
 
           {cookies.get("usuarioLogueado") ? (

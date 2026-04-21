@@ -30,18 +30,15 @@ componentDidMount() {
           <p>Cargando...</p>
         ) : (
           this.state.peliculas
-          .filter((pelicula, idx)=> idx < 4)
+          .filter((pelicula, idx) => this.state.verTodas ? true : idx < 4)
           .map((pelicula, idx) => (
             <Movie key={idx} datos={pelicula} />
           ))
         )}
       </section>
-      <Link className="btn btn-outline-primary mb-3" to="/movies">
-        <button type="button">
-          Ver todas
+      <button type="button" className="btn btn-outline-primary mb-3" onClick={() => this.setState({ verTodas: !this.state.verTodas })}>
+          {this.state.verTodas ? "Ver menos" : "Ver todas"}
         </button>
-          
-        </Link>
       </div>
     );
   }

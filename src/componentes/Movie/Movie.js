@@ -8,20 +8,21 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      esFavorito: false
+      esFavorito: false,
+      descripcion: false
     };
   }
 
   componentDidMount() {
     let favoritosGuardados = localStorage.getItem("favoritos");
 
-    
+
     let favoritos = favoritosGuardados !== null ? JSON.parse(favoritosGuardados) : [];
 
     let idPelicula = this.props.datos.id;
 
-    
-    let coincidentes = favoritos.filter(function(fav) {
+
+    let coincidentes = favoritos.filter(function (fav) {
       if (fav.id === idPelicula) {
         if (fav.tipo === "movie") {
           return true;
@@ -30,34 +31,34 @@ class Movie extends Component {
       return false;
     });
 
-    
+
     this.setState({ esFavorito: coincidentes.length > 0 ? true : false });
   }
 
   agregarQuitarFavoritos() {
     let favoritosGuardados = localStorage.getItem("favoritos");
 
-    
+
     let favoritos = favoritosGuardados !== null ? JSON.parse(favoritosGuardados) : [];
 
     if (this.state.esFavorito) {
-      
+
       let idPelicula = this.props.datos.id;
 
-      let filtrados = favoritos.filter(function(fav) {
+      let filtrados = favoritos.filter(function (fav) {
         if (fav.id === idPelicula) {
           if (fav.tipo === "movie") {
-            return false; 
+            return false;
           }
         }
-        return true; 
+        return true;
       });
 
       localStorage.setItem("favoritos", JSON.stringify(filtrados));
       this.setState({ esFavorito: false });
 
     } else {
-      
+
       let nuevoFavorito = {
         id: this.props.datos.id,
         tipo: "movie",
@@ -82,22 +83,26 @@ class Movie extends Component {
         <div className="cardBody">
           <h5 className="card-title">{this.props.datos.title}</h5>
 
-          <p className="card-text">{this.props.datos.overview}</p>
+          {this.state.verDescripcion ? <p className="card-text">{this.props.datos.overview}</p> : null}
 
-          <Link className="btn btn-primary" to={`/detalle/movie/${this.props.datos.id}`}>
-            Ver más
-          </Link>
-
-          
-          {cookies.get("usuarioLogueado") ? (
-            <button
-              className="btn alert-primary"
-              onClick={() => this.agregarQuitarFavoritos()}
-            >
-              
-              {this.state.esFavorito ? "❤️" : "🩶"}
+          <div className="d-flex gap-2 mt-2">
+            <button className="btn btn-primary btn-sm me-2" onClick={() => this.setState({ verDescripcion: !this.state.verDescripcion })}>
+              {this.state.verDescripcion ? "Ver menos" : "Ver más"}
             </button>
-          ) : null}
+
+            <Link className="btn btn-primary btn-sm me-2" to={`/detalle/movie/${this.props.datos.id}`}>
+              detalle
+            </Link>
+
+            {cookies.get("usuarioLogueado") ? (
+              <button
+                className="btn btn-outline-secondary btn-sm"
+                onClick={() => this.agregarQuitarFavoritos()}
+              >
+                {this.state.esFavorito ? "❤️" : "🩶"}
+              </button>
+            ) : null}
+          </div>
         </div>
       </article>
     );

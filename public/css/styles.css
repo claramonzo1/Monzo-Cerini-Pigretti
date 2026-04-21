@@ -85,6 +85,10 @@ nav {
     width: 15%;
 }
 
+.cardBody button, .cardBody a {
+    margin-right: 8px;
+}
+
 @media(min-width: 765px){
     nav {
         grid-template-columns: 1fr;

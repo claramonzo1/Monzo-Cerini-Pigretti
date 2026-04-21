@@ -6,7 +6,8 @@ class PopTv extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      series: []
+      series: [],
+      verTodas: false
     };
   }
 
@@ -29,18 +30,15 @@ return (
             <p>Cargando...</p>
           ) : (
             this.state.series
-            .filter ((serie, idx)=> idx < 4)
+            .filter((serie, idx) => this.state.verTodas ? true : idx < 4)
             .map((serie, idx) => (
               <Serie key={idx} datos={serie} />
             ))
           )}
         </section>
-        <Link className="btn btn-outline-warning mb-3" to="/serie">
-          <button type="button">
-            Ver todas
-          </button>
-          
-        </Link>
+        <button type="button" className="btn btn-outline-primary mb-3" onClick={() => this.setState({ verTodas: !this.state.verTodas })}>
+          {this.state.verTodas ? "Ver menos" : "Ver todas"}
+        </button>
       </div>
     );
   }

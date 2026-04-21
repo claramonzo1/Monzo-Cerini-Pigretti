@@ -45,7 +45,7 @@ class Login extends Component {
 
             if (usuarioEncontrado.length > 0) {
                 if (usuarioEncontrado[0].password === this.state.password) {
-                    cookies.set('sesion', this.state.email);
+                    cookies.set('usuarioLogueado', this.state.email);
                     this.setState({ error: '' }, this.props.history.push('/'));
 
 
@@ -67,7 +67,7 @@ class Login extends Component {
                 <h2 className="alert alert-primary">Login</h2>
 
                 <div>
-                    <form className="filter-form" onSubmit={(event) => this.enviarFormulario(event)}>
+                    <form className="filter-form" onSubmit={(event) => this.evitarFormulario(event)}>
                         <div>
                             <input type="email" placeholder="Email" value={this.state.email} required
                                 onChange={(event) => this.controlarEmail(event)}
