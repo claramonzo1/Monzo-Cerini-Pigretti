@@ -15,26 +15,21 @@ class Home extends Component {
     }
 
     controlarCambios(event) {
-        this.setState({
-            busqueda: event.target.value
-        });
+        this.setState({ busqueda: event.target.value });
     }
 
     controlarTipo(event) {
-        this.setState({
-            tipo: event.target.value
-        });
+        this.setState({ tipo: event.target.value });
     }
 
     enviarBusqueda(event) {
-        event.preventDefault();
-
-        if (this.state.busqueda() !== '') {
-            this.props.history.push(
-                "/resultado/" + this.state.tipo + "/" + this.state.busqueda
-            );
-        }
+    event.preventDefault();
+    if (this.state.busqueda !== '') {
+      this.props.history.push(
+        '/resultado/' + this.state.tipo + '/' + this.state.busqueda
+      );
     }
+  }
     render() {
 
         return (
@@ -42,7 +37,7 @@ class Home extends Component {
                 <h1>Udesa Movies</h1>
                 <Navbar />
 
-                <form className="search-form" onSubmit={(event) => this.enviarBusqueda(event)}>
+                <form className="search-form d-flex gap-2" onSubmit={(event) => this.enviarBusqueda(event)}>
                     <input
                         type="text"
                         placeholder="Buscar"
@@ -54,7 +49,7 @@ class Home extends Component {
                         <option value="tv">Series</option>
                     </select>
 
-                    <input type="submit" value="Submit" />
+                   <button className="btn btn-primary btn-sm" type="submit">Buscar</button>
                 </form>
 
                 <PopMovies />

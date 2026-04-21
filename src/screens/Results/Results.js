@@ -6,7 +6,7 @@ import Navbar from "../../componentes/Navbar/Navbar";
 const cookies = new Cookies();
 
 class Results extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             resultados: [],
@@ -17,9 +17,9 @@ class Results extends Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let favoritosGuardados = localStorage.getItem("favoritos");
-        if(favoritosGuardados !== null){
+        if (favoritosGuardados !== null) {
             favoritosGuardados = JSON.parse(favoritosGuardados);
         } else {
             favoritosGuardados = [];
@@ -28,20 +28,21 @@ class Results extends Component {
         this.setState(
             {
                 favoritos: favoritosGuardados,
-                hayCookie: cookies.get("user-auth-cookie") !== undefined
+                hayCookie: cookies.get("usuarioLogueado") !== undefined
             },
             () => this.buscarContenido()
         );
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps.match.params.busqueda !== this.props.match.params.busqueda ||
-            prevProps.match.params.tipo !== this.props.match.params.tipo){
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.params.busqueda !== this.props.match.params.busqueda) {
+            this.buscarContenido();
+        }
+        if (prevProps.match.params.tipo !== this.props.match.params.tipo) {
             this.buscarContenido();
         }
     }
-
-    buscarContenido(){
+    buscarContenido() {
         const tipo = this.props.match.params.tipo;
         const busqueda = this.props.match.params.busqueda;
 
@@ -58,40 +59,26 @@ class Results extends Component {
             .catch(error => console.log("El error fue: " + error));
     }
 
-    verDescripcion(id){
+    verDescripcion(id) {
         let estadoActual = this.state.mostrarDescripcion;
-
         estadoActual[id] = !estadoActual[id];
-
         this.setState({
             mostrarDescripcion: estadoActual
         });
     }
 
-    estaEnFavoritos(id){
-        let encontrado = false;
-
-        for(let i = 0; i < this.state.favoritos.length; i++){
-            if(this.state.favoritos[i].id === id){
-                encontrado = true;
-            }
-        }
-
-        return encontrado;
+    estaEnFavoritos(id) {
+        let encontrado = this.state.favoritos.filter(fav => fav.id === id);
+        return encontrado.length > 0;
     }
 
-    agregarQuitarFavoritos(item){
+    agregarQuitarFavoritos(item) {
         let favoritosActuales = this.state.favoritos;
-        let filtrados = [];
 
-        if(this.estaEnFavoritos(item.id)){
-            filtrados = favoritosActuales.filter(unFav => unFav.id !== item.id);
-
+        if (this.estaEnFavoritos(item.id)) {
+            let filtrados = favoritosActuales.filter(unFav => unFav.id !== item.id);
             localStorage.setItem("favoritos", JSON.stringify(filtrados));
-
-            this.setState({
-                favoritos: filtrados
-            });
+            this.setState({ favoritos: filtrados });
         } else {
             let favoritoNuevo = {
                 id: item.id,
@@ -100,22 +87,16 @@ class Results extends Component {
                 imagen: item.poster_path,
                 descripcion: item.overview
             };
-
             favoritosActuales.push(favoritoNuevo);
-
             localStorage.setItem("favoritos", JSON.stringify(favoritosActuales));
-
-            this.setState({
-                favoritos: favoritosActuales
-            });
+            this.setState({ favoritos: favoritosActuales });
         }
     }
-
-    render(){
+    render() {
         const tipo = this.props.match.params.tipo;
         const busqueda = this.props.match.params.busqueda;
 
-        return(
+        return (
             <div className="container">
                 <h1>Udesa Movies</h1>
                 <Navbar />
@@ -130,7 +111,6 @@ class Results extends Component {
                         <p>No se encontraron resultados.</p>
                     ) : null
                 ) : null}
-
                 <section className="row">
                     {this.state.resultados.map((item, idx) => (
                         <article className="col-3" key={item.id + idx}>
@@ -146,7 +126,7 @@ class Results extends Component {
 
                             <h4>{item.title ? item.title : item.name}</h4>
 
-                            <button onClick={() => this.verDescripcion(item.id)}>
+                            <button className="btn btn-primary btn-sm" onClick={() => this.verDescripcion(item.id)}>
                                 {this.state.mostrarDescripcion[item.id] ? "Ocultar descripción" : "Ver descripción"}
                             </button>
 
@@ -154,12 +134,12 @@ class Results extends Component {
                                 <p>{item.overview}</p>
                             ) : null}
 
-                            <Link to={`/detalle/${tipo}/${item.id}`}>
+                            <Link className="btn btn-secondary btn-sm" to={`/detalle/${tipo}/${item.id}`}>
                                 Ir a detalle
                             </Link>
 
                             {this.state.hayCookie ? (
-                                <button onClick={() => this.agregarQuitarFavoritos(item)}>
+                                <button className="btn btn-warning btn-sm" onClick={() => this.agregarQuitarFavoritos(item)}>
                                     {this.estaEnFavoritos(item.id) ? "Quitar de favoritos" : "Agregar a favoritos"}
                                 </button>
                             ) : null}

@@ -89,6 +89,8 @@ nav {
     margin-right: 8px;
 }
 
+
+
 @media(min-width: 765px){
     nav {
         grid-template-columns: 1fr;
@@ -125,4 +127,9 @@ nav {
 }
 .hide{
     display: none;
+}
+
+.poster {
+    width: 100%;
+     max-width: 200px;
 }
