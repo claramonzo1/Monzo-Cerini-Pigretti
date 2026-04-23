@@ -115,10 +115,10 @@ class Results extends Component {
                     {this.state.resultados.map((item, idx) => (
                         <article className="col-3" key={item.id + idx}>
                             {item.poster_path ? (
-                                <img
+                                <img className="img-fluid"
                                     src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
                                     alt={item.title ? item.title : item.name}
-                                    style={{ width: "100%" }}
+                                   
                                 />
                             ) : (
                                 <p>Sin imagen</p>
@@ -127,20 +127,20 @@ class Results extends Component {
                             <h4>{item.title ? item.title : item.name}</h4>
 
                             <button className="btn btn-primary btn-sm" onClick={() => this.verDescripcion(item.id)}>
-                                {this.state.mostrarDescripcion[item.id] ? "Ocultar descripción" : "Ver descripción"}
+                                {this.state.mostrarDescripcion[item.id] ? "Ocultar descripción" : "Ver más"}
                             </button>
 
                             {this.state.mostrarDescripcion[item.id] ? (
                                 <p>{item.overview}</p>
                             ) : null}
 
-                            <Link className="btn btn-secondary btn-sm" to={`/detalle/${tipo}/${item.id}`}>
-                                Ir a detalle
+                            <Link className="btn btn-primary btn-sm" to={`/detalle/${tipo}/${item.id}`}>
+                                detalle
                             </Link>
 
                             {this.state.hayCookie ? (
-                                <button className="btn btn-warning btn-sm" onClick={() => this.agregarQuitarFavoritos(item)}>
-                                    {this.estaEnFavoritos(item.id) ? "Quitar de favoritos" : "Agregar a favoritos"}
+                                <button className="btn btn-outline-secondary btn-sm" onClick={() => this.agregarQuitarFavoritos(item)}>
+                                    {this.estaEnFavoritos(item.id) ? "❤️" : "🩶"}
                                 </button>
                             ) : null}
                         </article>
