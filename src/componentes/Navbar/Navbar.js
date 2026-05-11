@@ -1,27 +1,14 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
-import { Component } from "react";
 
 const cookies = new Cookies();
 
-class Navbar extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            usuarioLogueado: cookies.get("usuarioLogueado"),
-        }
-    }
+function Navbar(props) {
 
-    ocultar(){
-        this.setState({
-            ocultar: !this.state.verMas
-        })
-    }
+    const [usuarioLogueado, setUsuarioLogueado] = useState(cookies.get("usuarioLogueado"));
 
-
-    render(){
-       const menu = [
+    const menu = [
         { Nombre: "Home", Path: "/" },
         { Nombre: "Movies", Path: "/movies" },
         { Nombre: "Series", Path: "/series" },
@@ -29,24 +16,27 @@ class Navbar extends Component{
         { Nombre: "Crear Cuenta", Path: "/registro" },
         { Nombre: "Favoritos", Path: "/favoritos" }
     ];
-        return(
+
+    return (
         <div>
             <nav>
-            <ul className="nav nav-tabs my-4">
-                {
-                    menu.map((elemento, idx) => 
-                    <li key={elemento + idx} className={ elemento.Nombre == "Login" ? (this.state.usuarioLogueado == null ? "show" : "hide")
-                        : elemento.Nombre == "Crear Cuenta" ? (this.state.usuarioLogueado == null ? "show" : "hide")
-                        : elemento.Nombre == "Favoritos" ? (this.state.usuarioLogueado != null ? "show" : "hide")
-                        : "show"}
-                    >
-    <a className="nav-link"><Link to={elemento.Path}> {elemento.Nombre}</Link></a></li>) }
-            </ul>
-        </nav>
+                <ul className="nav nav-tabs my-4">
+                    {menu.map((elemento, idx) =>
+                        <li key={elemento.Nombre + idx}
+                            className={
+                                elemento.Nombre === "Login" ? (usuarioLogueado == null ? "show" : "hide")
+                                : elemento.Nombre === "Crear Cuenta" ? (usuarioLogueado == null ? "show" : "hide")
+                                : elemento.Nombre === "Favoritos" ? (usuarioLogueado != null ? "show" : "hide")
+                                : "show"
+                            }
+                        >
+                            <Link className="nav-link" to={elemento.Path}>{elemento.Nombre}</Link>
+                        </li>
+                    )}
+                </ul>
+            </nav>
         </div>
-    )
-    }
+    );
 }
-
 
 export default Navbar;

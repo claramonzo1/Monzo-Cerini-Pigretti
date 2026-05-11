@@ -1,103 +1,84 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../../componentes/Navbar/Navbar";
 import Serie from "../../componentes/Serie/Serie";
 
-class Series extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            datos: [],
-            seriesFiltradas: [],
-            pagina: 1,
-            valor: ""
-        };
-    }
+function Series(props) {
 
-    componentDidMount() {
+    const [datos, setDatos] = useState([]);
+    const [seriesFiltradas, setSeriesFiltradas] = useState([]);
+    const [pagina, setPagina] = useState(1);
+    const [valor, setValor] = useState('');
+
+    useEffect(() => {
         fetch("https://api.themoviedb.org/3/tv/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=1")
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    seriesFiltradas: data.results,
-                    datos: data.results,
-                    pagina: 2
-                });
+                setSeriesFiltradas(data.results);
+                setDatos(data.results);
+                setPagina(2);
             })
             .catch(error => console.log("error"));
-    }
+    }, []);
 
-    cargarMas() {
-        fetch("https://api.themoviedb.org/3/tv/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=" + this.state.pagina)
+    function cargarMas() {
+        fetch("https://api.themoviedb.org/3/tv/popular?api_key=1944c47872d6439a6a7d6a987a1991ac&language=en-US&page=" + pagina)
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    datos: this.state.datos.concat(data.results),
-                    seriesFiltradas: this.state.seriesFiltradas.concat(data.results),
-                    pagina: this.state.pagina + 1
-                });
+                setDatos(datos.concat(data.results));
+                setSeriesFiltradas(seriesFiltradas.concat(data.results));
+                setPagina(pagina + 1);
             })
             .catch(error => console.log("error"));
     }
 
-    evitarSubmit(event) {
+    function evitarSubmit(event) {
         event.preventDefault();
     }
 
-    controlCambios(event) {
-        this.setState({
-            valor: event.target.value
-        }, () => this.filtrarSeries(this.state.valor)
-        );
+    function controlCambios(event) {
+        let texto = event.target.value;
+        setValor(texto);
+        filtrarSeries(texto);
     }
 
-    filtrarSeries(textoAFiltrar) {
-        this.setState({
-            seriesFiltradas: this.state.datos.filter((elm) =>
+    function filtrarSeries(textoAFiltrar) {
+        setSeriesFiltradas(
+            datos.filter((elm) =>
                 elm.name.toLowerCase().includes(textoAFiltrar.toLowerCase())
             )
-        });
-    }
-
-    render() {
-        return (
-            <div className="all-movies container">
-                <h1>Udesa Movies</h1>
-
-                <Navbar />
-
-                <h2 className="alert alert-primary">Todas las series</h2>
-
-                <form className="filter-form" onSubmit={(event) => this.evitarSubmit(event)}>
-                    <label className="label-filtrar">
-                        Buscar serie:
-                    </label>
-                    <input type="text" placeholder="Buscar" onChange={(event) => this.controlCambios(event)} />
-                </form>
-
-                {
-                    this.state.pagina < this.state.seriesFiltradas.length ?
-                    <button onClick={() => this.cargarMas()} className="btn btn-info">
-                        Cargar Más
-                    </button>
-                    :
-                    null
-                }
-
-                <section className="cards">
-                    {
-                        this.state.seriesFiltradas.length === 0
-                            ? <h3>Cargando...</h3>
-                            : this.state.seriesFiltradas.map((elm, idx) => (
-                                <Serie
-                                    key={idx}
-                                    datos={elm}
-                                />
-                            ))
-                    }
-                </section>
-            </div>
         );
     }
+
+    return (
+        <div className="all-movies container">
+            <h1>Udesa Movies</h1>
+            <Navbar />
+            <h2 className="alert alert-primary">Todas las series</h2>
+
+            <form className="filter-form" onSubmit={(event) => evitarSubmit(event)}>
+                <label className="label-filtrar">Buscar serie: </label>
+                <input type="text" placeholder="Buscar" onChange={(event) => controlCambios(event)} />
+            </form>
+
+            {pagina < seriesFiltradas.length ? (
+                <button onClick={() => cargarMas()} className="btn btn-info">
+                    Cargar Más
+                </button>
+            ) : null}
+
+            <section className="cards">
+                {seriesFiltradas.length === 0
+                    ? <h3>Cargando...</h3>
+                    : seriesFiltradas.map((elm, idx) => (
+                        <Serie
+                            key={idx}
+                            datos={elm}
+                        />
+                    ))
+                }
+            </section>
+        </div>
+    );
 }
 
 export default Series;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+// Importa Switch y Route para definir las rutas de la app.
 import Home from "./screens/Home/Home";
 import Detalle from "./screens/Detalle/Detalle";
 import Login from "./screens/Login/Login";
